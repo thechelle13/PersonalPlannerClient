@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
-export const NavBar = ({ setUser, setToken }) => {
+export const NavBar = ({ currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
   const navbar = useRef();
   const hamburger = useRef();
@@ -39,16 +39,10 @@ export const NavBar = ({ setUser, setToken }) => {
 
       <div className="navbar-menu" ref={navbar}>
         <div className="navbar-start">
-          {setUser ? (
+          {currentUser ? (
             <>
               <Link to="/" className="navbar-item">
                 Home
-              </Link>
-              <Link to="/posts" className="navbar-item">
-                Posts
-              </Link>
-              <Link to="/courts" className="navbar-item">
-                Courts
               </Link>
               <Link to="/profile" className="navbar-item">
                 Profile
@@ -60,11 +54,11 @@ export const NavBar = ({ setUser, setToken }) => {
           <div className="navbar-end">
             <div className="navbar-logout">
               <div className="buttons">
-                {setUser ? (
+                {currentUser ? (
                   <button
                     className="button is-outlined"
                     onClick={() => {
-                      setToken("");
+                      setCurrentUser("");
                       navigate("/login");
                     }}
                   >
@@ -80,9 +74,6 @@ export const NavBar = ({ setUser, setToken }) => {
                     </Link>
                     <Link to="/" className="button is-outlined"> 
                       Home
-                    </Link>
-                    <Link to="/profile" className="button is-outlined"> 
-                      Profile 
                     </Link>
                   </>
                 )}
