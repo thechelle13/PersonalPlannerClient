@@ -1,6 +1,5 @@
 import React from 'react';
-import './pages.css'
-
+import './pages.css';
 
 export const Home = () => {
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -29,7 +28,7 @@ export const Home = () => {
       calendar.push(
         <div
           key={`day-${i}`}
-          className={`text-center p-2 ${
+          className={`text-center p-2 border border-black ${
             i === currentDay ? 'bg-blue-900 text-white' : 'text-black'
           }`}
         >
@@ -49,22 +48,22 @@ export const Home = () => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-4">
-      <div className="grid grid-cols-7 gap-1 mb-2">
-        {days.map((day, index) => (
-          <div
-            key={`day-${index}`}
-            className="text-center font-bold p-2 bg-blue-900 text-white rounded-md"
-          >
-            {day}
-          </div>
-        ))}
-      </div>
-      <div className="grid grid-cols-7 gap-1">
-        {renderCalendar()}
+    <div className="container mx-auto w-80%">
+      <div className="flex flex-col items-center mt-4">
+        <div className="grid grid-cols-7 gap-1 mb-2 w-full">
+          {days.map((day, index) => (
+            <div
+              key={`day-${index}`}
+              className="text-center font-bold p-2 border border-black bg-blue-900 text-white rounded-md"
+            >
+              {day}
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-7 gap-1 w-full">
+          {renderCalendar()}
+        </div>
       </div>
     </div>
   );
 };
-
- 
