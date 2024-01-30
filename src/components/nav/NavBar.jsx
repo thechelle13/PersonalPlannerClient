@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
-export const NavBar = ({ token, setToken }) => {
+export const NavBar = ({ setUser, setToken }) => {
   const navigate = useNavigate();
   const navbar = useRef();
   const hamburger = useRef();
@@ -39,7 +39,7 @@ export const NavBar = ({ token, setToken }) => {
 
       <div className="navbar-menu" ref={navbar}>
         <div className="navbar-start">
-          {token ? (
+          {setUser ? (
             <>
               <Link to="/" className="navbar-item">
                 Home
@@ -60,7 +60,7 @@ export const NavBar = ({ token, setToken }) => {
           <div className="navbar-end">
             <div className="navbar-logout">
               <div className="buttons">
-                {token ? (
+                {setUser ? (
                   <button
                     className="button is-outlined"
                     onClick={() => {
@@ -77,6 +77,12 @@ export const NavBar = ({ token, setToken }) => {
                     </Link>
                     <Link to="/login" className="button is-outlined">
                       Login
+                    </Link>
+                    <Link to="/" className="button is-outlined"> 
+                      Home
+                    </Link>
+                    <Link to="/profile" className="button is-outlined"> 
+                      Profile 
                     </Link>
                   </>
                 )}

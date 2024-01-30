@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { loginUser } from "../../managers/AuthManager"
 
-export const Login = ({ setToken }) => {
+export const Login = ({ setUser }) => {
   const username = useRef()
   const password = useRef()
   const navigate = useNavigate()
@@ -18,7 +18,7 @@ export const Login = ({ setToken }) => {
 
     loginUser(user).then(res => {
       if ("token" in res && res.token) {
-        setToken(res.token)
+        setUser(res.token)
         navigate("/")
       }
       else {
@@ -30,7 +30,7 @@ export const Login = ({ setToken }) => {
   return (
     <section className="flex justify-center items-center h-screen">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96" onSubmit={handleLogin}>
-        <h1 className="text-3xl font-bold mb-6">Proud Pickler</h1>
+        <h1 className="text-3xl font-bold mb-6">Personal Planner</h1>
         <p className="text-lg mb-4">Please sign in</p>
 
         <div className="mb-4">
