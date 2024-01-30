@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom"
-import { NavBar } from "../components/nav/NavBar"
+import NavBar from "../components/nav/NavBar";
+
 
 export const Authorized = ({ currentUser, setCurrentUser }) => {
   return (
