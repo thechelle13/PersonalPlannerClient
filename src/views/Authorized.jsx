@@ -1,8 +1,13 @@
 import { Navigate, Outlet } from "react-router-dom"
+import { NavBar } from "../components/nav/NavBar"
 
-export const Authorized = ({ currentUser, setUser  }) => {
-  if (currentUser) {
-    return <Outlet />
-  }
-  return <Navigate to='/login' replace />
-}
+export const Authorized = ({ currentUser, setCurrentUser }) => {
+  return (
+    <>
+      <NavBar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <main className="">
+        <Outlet />
+      </main>
+    </>
+  );
+};
