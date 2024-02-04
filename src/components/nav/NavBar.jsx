@@ -16,45 +16,39 @@ const NavBar = ({ currentUser, setCurrentUser }) => {
               /> */}
             </Link>
           </div>
-          <div className="hidden md:flex space-x-4">
-            <button
-              onClick={() => navigate("/")}
-              className="text-blue hover:bg-blue-800 px-3 py-2 rounded-md text-sm font-medium"
-            >
+          <div className="hidden md:flex space-x-4 text-lg"> 
+            <Link to="/" className="text-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">
               Home
-            </button>
+            </Link>
+            <Link to="/calendar" className="text-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              Calendar
+            </Link>
+            <Link to="/weather" className="text-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              Weather Forecasts
+            </Link>
             {currentUser ? (
               <>
-                <button
-                  onClick={() => navigate("/profile")}
-                  className="text-blue hover:bg-blue-800 px-3 py-2 rounded-md text-sm font-medium"
-                >
+                <Link to="/profile" className="text-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Profile
-                </button>
+                </Link>
                 <button
                   onClick={() => {
                     setCurrentUser("");
                     navigate("/login");
                   }}
-                  className="text-blue hover:bg-blue-800 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Logout
                 </button>
               </>
             ) : (
               <>
-                <button
-                  onClick={() => navigate("/register")}
-                  className="text-blue hover:bg-blue-800 px-3 py-2 rounded-md text-sm font-medium"
-                >
+                <Link to="/register" className="text-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Register
-                </button>
-                <button
-                  onClick={() => navigate("/login")}
-                  className="text-blue hover:bg-blue-800 px-3 py-2 rounded-md text-sm font-medium"
-                >
+                </Link>
+                <Link to="/login" className="text-blue hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Login
-                </button>
+                </Link>
               </>
             )}
           </div>
@@ -65,3 +59,4 @@ const NavBar = ({ currentUser, setCurrentUser }) => {
 };
 
 export default NavBar;
+

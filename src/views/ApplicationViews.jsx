@@ -5,6 +5,8 @@ import { Register } from "../components/auth/Register";
 import { Authorized } from "./Authorized";
 import { Home } from "../pages/Home";
 import { Profile } from "../pages/Profile";
+import { Calendar } from "../pages/Calendar";
+import { Weather } from "../pages/Weather";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState(() => {
@@ -22,6 +24,8 @@ export const ApplicationViews = () => {
       <Routes>
         <Route path="/" element={<Authorized currentUser={currentUser} setCurrentUser={setUser} />}>
           <Route index element={<Home />} />
+          <Route path="/calendar" element={<Calendar />} />
+        <Route path="/weather" element={<Weather />} />
         </Route>
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register setUser={setUser} />} />
@@ -29,9 +33,11 @@ export const ApplicationViews = () => {
           path="/profile"
           element={<Authorized currentUser={currentUser} setCurrentUser={setUser} />}
         >
+          
           <Route index element={<Profile currentUser={currentUser} />} />
         </Route>
         {/* Add other Routes here */}
+        
       </Routes>
     </>
   );
