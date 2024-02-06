@@ -1,31 +1,41 @@
-import { useRef, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { loginUser } from "../../managers/AuthManager"
+import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../../managers/AuthManager";
 
 export const Login = ({ setUser }) => {
-  const username = useRef()
-  const password = useRef()
-  const navigate = useNavigate()
-  const [isUnsuccessful, setisUnsuccessful] = useState(false)
+  const username = useRef();
+  const password = useRef();
+  const navigate = useNavigate();
+  const [isUnsuccessful, setisUnsuccessful] = useState(false);
 
   const handleLogin = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const user = {
       username: username.current.value,
       password: password.current.value
-    }
+    };
 
     loginUser(user).then(res => {
       if ("token" in res && res.token) {
-        setUser(res.token)
-        navigate("/")
+        // Modify setUser to handle the complete user object
+        setUser({
+          token: res.token,
+          id: res.id,
+          username: res.username,
+          email: res.email,
+          firstName: res.first_name,
+          lastName: res.last_name,
+          // Include other user details as needed
+          pp_user: res.pp_user,
+        });
+        
+        navigate("/");
+      } else {
+        setisUnsuccessful(true);
       }
-      else {
-        setisUnsuccessful(true)
-      }
-    })
-  }
+    });
+  };
 
   return (
     <section className="flex justify-center items-center h-screen">
