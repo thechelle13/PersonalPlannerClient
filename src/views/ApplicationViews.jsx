@@ -7,6 +7,7 @@ import { Home } from "../pages/Home";
 import { Profile } from "../pages/Profile";
 import { Calendar } from "../pages/Calendar";
 import { Weather } from "../pages/Weather";
+import { EventForm } from "../components/forms/EventForm";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState(() => {
@@ -24,7 +25,7 @@ export const ApplicationViews = () => {
       <Routes>
         <Route path="/" element={<Authorized currentUser={currentUser} setCurrentUser={setUser} />}>
           <Route index element={<Home />} />
-          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/calendar" element={<Calendar currentUser={currentUser}/>} />
         <Route path="/weather" element={<Weather />} />
         </Route>
         <Route path="/login" element={<Login setUser={setUser} />} />
@@ -36,6 +37,10 @@ export const ApplicationViews = () => {
           
           <Route index element={<Profile currentUser={currentUser} />} />
         </Route>
+        <Route path="/create-event" element={<Authorized currentUser={currentUser} setCurrentUser={setUser} />}>
+          <Route index element={<EventForm />} />
+        </Route>
+
         {/* Add other Routes here */}
         
       </Routes>
