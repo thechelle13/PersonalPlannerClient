@@ -5,7 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {      
+      colors: {
+      goldenrod: '#DAA520',
+      charcoal: '#051313',
+      Navy: '#103548',
+    },
   },
+},
+
   plugins: [],
 }

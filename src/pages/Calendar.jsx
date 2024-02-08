@@ -1,68 +1,141 @@
-import React from 'react';
-import './pages.css';
-import { Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
-export const Calendar = () => {
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const currentDate = new Date();
-  const currentDay = currentDate.getDate();
-  const currentMonth = currentDate.getMonth();
-  const currentYear = currentDate.getFullYear();
-  // Get the total number of days in the current month
-  const totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
-  // Get the index of the first day of the month (0 - Sunday, 1 - Monday, ..., 6 - Saturday)
-  const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
-  const renderCalendar = () => {
-    const calendar = [];
-    let dayCounter = 1;
-    // Render empty cells for days before the first day of the month
-    for (let i = 0; i < firstDayIndex; i++) {
-      calendar.push(<div key={`empty-${i}`} className="text-center"></div>);
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+export const Calendar = ({ currentUser }) => {
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [events, setEvents] = useState({});
+  const [users, setUsers] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    if (Array.isArray(users)) {
+      getEvents().then((eventsArray) => {
+        const eventsByDate = eventsArray.reduce((acc, event) => {
+          // ... (unchanged code for organizing events by date)
+        }, {});
+        setEvents(eventsByDate);
+      });
     }
-    // Render days of the month
-    for (let i = 1; i <= totalDays; i++) {
-      calendar.push(
-        <div
-          key={`day-${i}`}
-          className={`text-center p-2 border border-black ${
-            i === currentDay ? 'bg-blue-900 text-white' : 'text-black'
-          }`}
-        >
-          {i}
-        </div>
-      );
-      dayCounter++;
-    }
-    // Render empty cells for days after the last day of the month
-    while (dayCounter <= 35) {
-      calendar.push(<div key={`empty-${dayCounter}`} className="text-center"></div>);
-      dayCounter++;
-    }
-    return calendar;
+  }, [users]);
+
+  useEffect(() => {
+    getUsers().then((userArray) => {
+      setUsers(userArray);
+    });
+  }, []);
+
+  const firstDay = new Date(currentYear, currentMonth, 1);
+  const lastDay = new Date(currentYear, currentMonth + 1, 0);
+  const lastDayIndex = lastDay.getDay();
+  const lastDayDate = lastDay.getDate();
+  const prevLastDay = new Date(currentYear, currentMonth, 0);
+  const prevLastDayDate = prevLastDay.getDate();
+  const nextDays = 7 - lastDayIndex - 1;
+
+  const handlePrevClick = () => {
+    setCurrentMonth((prevMonth) => (prevMonth === 0 ? 11 : prevMonth - 1));
   };
+
+  const handleNextClick = () => {
+    setCurrentMonth((prevMonth) => (prevMonth === 11 ? 0 : prevMonth + 1));
+  };
+
+  const filteredEvents = selectedCategory
+    ? Object.fromEntries(
+        Object.entries(events).map(([date, eventArray]) => [
+          date,
+          eventArray.filter(
+            (event) => event.categoryId === parseInt(selectedCategory)
+          ),
+        ])
+      )
+    : events;
+
+  const filterEventsBySearch = (events, searchQuery) => {
+    return Object.fromEntries(
+      Object.entries(events).map(([date, eventArray]) => [
+        date,
+        eventArray.filter((event) =>
+          event.className.toLowerCase().includes(searchQuery.toLowerCase())
+        ),
+      ])
+    );
+  };
+
+  const searchedEvents = filterEventsBySearch(filteredEvents, searchQuery);
+
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-4">Calendar</h1>
-      <p>Display basic calendar information here.</p>
-      <div className="container mx-auto w-80%">
-      <div className="flex flex-col items-center mt-4">
-        <div className="grid grid-cols-7 gap-1 mb-2 w-full">
-          {days.map((day, index) => (
-            <div
-              key={`day-${index}`}
-              className="text-center font-bold p-2 border border-black bg-blue-900 text-white rounded-md"
-            >
+    <>
+      <div className="calendar">
+        <div className="header">
+          <div className="month">{`${months[currentMonth]} ${currentYear}`}</div>
+          {currentUser ? (
+            <>
+              <PostNewEventButton />
+            </>
+          ) : (
+            <CategoryFilter
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
+          )}
+          <input
+            type="text"
+            placeholder="Search Events"
+            className="search-bar"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <div className="btns">
+            <CalendarLeftAndRightBtn
+              handleNextClick={handleNextClick}
+              handlePrevClick={handlePrevClick}
+            />
+          </div>
+        </div>
+        <div className="weekdays">
+          {days.map((day) => (
+            <div className="day" key={day}>
               {day}
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-7 gap-1 w-full">
-          {renderCalendar()}
+        <div className="days">
+          <CalendarDaysData
+            prevLastDayDate={prevLastDayDate}
+            firstDay={firstDay}
+            lastDayDate={lastDayDate}
+            currentYear={currentYear}
+            currentMonth={currentMonth}
+            nextDays={nextDays}
+            events={searchedEvents}
+          />
+        </div>
+        <div className="current-date">
+          <p>{`Today: ${currentDate.toDateString()}`}</p>
         </div>
       </div>
-    </div>
-    </div>
-    
+    </>
   );
 };
 
