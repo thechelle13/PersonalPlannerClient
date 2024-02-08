@@ -1,40 +1,54 @@
-import React, { useState, useEffect } from "react";
 
-
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+import React from 'react';
+import './pages.css';
+import { useNavigate } from "react-router-dom";
 
 export const Calendar = ({ currentUser }) => {
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [events, setEvents] = useState({});
-  const [users, setUsers] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const currentDate = new Date();
+  const currentDay = currentDate.getDate();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+  const totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
+  const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
 
-  useEffect(() => {
-    if (Array.isArray(users)) {
-      getEvents().then((eventsArray) => {
-        const eventsByDate = eventsArray.reduce((acc, event) => {
-          // ... (unchanged code for organizing events by date)
-        }, {});
-        setEvents(eventsByDate);
-      });
+  const navigate = useNavigate();
+
+
+  const handleCreateEvent = () => {
+    if (!currentUser) {
+      alert("You are not authorized to create an event. Please Log in or Register.");
+    } else {
+      // Redirect to the create event page
+      navigate("/create-event");
+    }
+  };
+
+  const renderCalendar = () => {
+    const calendar = [];
+    let dayCounter = 1;
+
+    for (let i = 0; i < firstDayIndex; i++) {
+      calendar.push(<div key={`empty-${i}`} className="text-center"></div>);
+    }
+
+    for (let i = 1; i <= totalDays; i++) {
+      calendar.push(
+        <div
+          key={`day-${i}`}
+          className={`text-center p-2 border border-black ${
+            i === currentDay ? 'bg-blue-900 text-white' : 'text-black'
+          }`}
+        >
+          {i}
+        </div>
+      );
+      dayCounter++;
+    }
+
+    while (dayCounter <= 35) {
+      calendar.push(<div key={`empty-${dayCounter}`} className="text-center"></div>);
+      dayCounter++;
     }
   }, [users]);
 
@@ -43,47 +57,6 @@ export const Calendar = ({ currentUser }) => {
       setUsers(userArray);
     });
   }, []);
-
-  const firstDay = new Date(currentYear, currentMonth, 1);
-  const lastDay = new Date(currentYear, currentMonth + 1, 0);
-  const lastDayIndex = lastDay.getDay();
-  const lastDayDate = lastDay.getDate();
-  const prevLastDay = new Date(currentYear, currentMonth, 0);
-  const prevLastDayDate = prevLastDay.getDate();
-  const nextDays = 7 - lastDayIndex - 1;
-
-  const handlePrevClick = () => {
-    setCurrentMonth((prevMonth) => (prevMonth === 0 ? 11 : prevMonth - 1));
-  };
-
-  const handleNextClick = () => {
-    setCurrentMonth((prevMonth) => (prevMonth === 11 ? 0 : prevMonth + 1));
-  };
-
-  const filteredEvents = selectedCategory
-    ? Object.fromEntries(
-        Object.entries(events).map(([date, eventArray]) => [
-          date,
-          eventArray.filter(
-            (event) => event.categoryId === parseInt(selectedCategory)
-          ),
-        ])
-      )
-    : events;
-
-  const filterEventsBySearch = (events, searchQuery) => {
-    return Object.fromEntries(
-      Object.entries(events).map(([date, eventArray]) => [
-        date,
-        eventArray.filter((event) =>
-          event.className.toLowerCase().includes(searchQuery.toLowerCase())
-        ),
-      ])
-    );
-  };
-
-  const searchedEvents = filterEventsBySearch(filteredEvents, searchQuery);
-
   return (
     <>
       <div className="calendar">
@@ -136,6 +109,34 @@ export const Calendar = ({ currentUser }) => {
         </div>
       </div>
     </>
+  return (
+    <div className="container mx-auto p-8">
+      <h1 className="text-3xl font-bold mb-4">Calendar</h1>
+      <p>Display basic calendar information here.</p>
+      <div className="container mx-auto w-80%">
+        <div className="flex flex-col items-center mt-4">
+          <div className="grid grid-cols-7 gap-1 mb-2 w-full">
+            {days.map((day, index) => (
+              <div
+                key={`day-${index}`}
+                className="text-center font-bold p-2 border border-black bg-blue-900 text-white rounded-md"
+              >
+                {day}
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-7 gap-1 w-full">
+            {renderCalendar()}
+          </div>
+          <button
+            className="text-center font-bold p-2 border border-black bg-blue-900 text-white rounded-md"
+            onClick={handleCreateEvent}
+          >
+            Create An Event
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
