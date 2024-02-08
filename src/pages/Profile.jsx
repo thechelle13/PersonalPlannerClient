@@ -17,15 +17,16 @@ export const Profile = ({ currentUser }) => {
         <h1 className="text-3xl font-bold mb-4">Hello, {currentUser.firstName}!</h1>
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Profile Page</h2>
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-2">User Information</h3>
-            <p>City: {currentUser.pp_user.city}</p>
-            <p>State: {currentUser.pp_user.state}</p>
-            <p>Zipcode: {currentUser.pp_user.zipcode}</p>
-            <p>Address: {currentUser.pp_user.address}</p>
+          <div className="mb-6 bg-Navy p-6 rounded-lg shadow-lg border border-black">
+            <i className="fas fa-house-user fa-5x mb-4" style={{ color: '#DAA520' }}></i>
+            <h3 className="text-lg font-semibold mb-4"></h3>
+            <p className="font-bold text-2xl text-goldenrod mb-4">City: {currentUser.pp_user.city}</p>
+            <p className="font-bold text-2xl text-goldenrod mb-4">State: {currentUser.pp_user.state}</p>
+            <p className="font-bold text-2xl text-goldenrod mb-4">Zipcode: {currentUser.pp_user.zipcode}</p>
+            <p className="font-bold text-2xl text-goldenrod mb-4">Address: {currentUser.pp_user.address}</p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-2 underline">My Events</h3>
+            <h1 className="text-lg font-semibold mb-2 underline">My Events</h1>
             {/* Add your events rendering logic here */}
             {/* For example, you can map through user's events and display them */}
             {/* {currentUser.events.map(event => (

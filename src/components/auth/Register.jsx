@@ -50,122 +50,106 @@ export const Register = ({ setUser }) => {
         <h1 className="text-3xl font-bold mb-6">Personal Planner</h1>
         <p className="text-lg mb-4">Create an account</p>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
-            First Name
-          </label>
+                <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2">
+          First Name
+        </label>
+        <input
+          id="firstName"
+          type="text"
+          className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+          ref={firstName}
+        />
+
+        <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2">
+          Last Name
+        </label>
+        <input
+          id="lastName"
+          type="text"
+          className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+          ref={lastName}
+        />
+
+        <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">
+          Username
+        </label>
+        <input
+          id="username"
+          type="text"
+          className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+          ref={username}
+        />
+
+        <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
+          Email
+        </label>
+        <input
+          id="email"
+          type="email"
+          className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+          ref={email}
+          autoComplete="email"
+        />
+
+        <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+          Password
+        </label>
+        <div className="flex">
           <input
+            id="password"
+            type="password"
+            placeholder="Password"
             className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="firstName"
-            type="text"
-            ref={firstName}
+            ref={password}
+          />
+          <input
+            id="verifyPassword"
+            type="password"
+            placeholder="Verify Password"
+            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ml-2"
+            ref={verifyPassword}
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
-            Last Name
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="lastName"
-            type="text"
-            ref={lastName}
-          />
-        </div>
+        <label htmlFor="address" className="block text-gray-700 text-sm font-bold mb-2">
+          Address
+        </label>
+        <textarea
+          id="address"
+          placeholder="Enter your address..."
+          className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+          ref={address}
+        ></textarea>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-            Username
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            type="text"
-            ref={username}
-          />
-        </div>
+        <label htmlFor="city" className="block text-gray-700 text-sm font-bold mb-2">
+          City
+        </label>
+        <input
+          id="city"
+          type="text"
+          className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+          ref={city}
+        />
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-            Email
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="email"
-            type="email"
-            ref={email}
-          />
-        </div>
+        <label htmlFor="state" className="block text-gray-700 text-sm font-bold mb-2">
+          State
+        </label>
+        <input
+          id="state"
+          type="text"
+          className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+          ref={state}
+        />
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-            Password
-          </label>
-          <div className="flex">
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="Password"
-              ref={password}
-            />
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ml-2"
-              id="verifyPassword"
-              type="password"
-              placeholder="Verify Password"
-              ref={verifyPassword}
-            />
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
-            Address
-          </label>
-          <textarea
-            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Enter your address..."
-            ref={address}
-          ></textarea>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="city">
-            City
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="city"
-            type="text"
-            ref={city}
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="state">
-            State
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="state"
-            type="text"
-            ref={state}
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="zipcode">
-            Zipcode
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="zipcode"
-            type="text"
-            ref={zipcode}
-          />
-        </div>
+        <label htmlFor="zipcode" className="block text-gray-700 text-sm font-bold mb-2">
+          Zipcode
+        </label>
+        <input
+          id="zipcode"
+          type="text"
+          className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+          ref={zipcode}
+        />
 
         <div className="flex items-center justify-between">
           <button

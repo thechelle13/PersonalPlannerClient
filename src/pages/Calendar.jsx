@@ -1,3 +1,4 @@
+
 import React from 'react';
 import './pages.css';
 import { useNavigate } from "react-router-dom";
@@ -49,9 +50,65 @@ export const Calendar = ({ currentUser }) => {
       calendar.push(<div key={`empty-${dayCounter}`} className="text-center"></div>);
       dayCounter++;
     }
-    return calendar;
-  };
+  }, [users]);
 
+  useEffect(() => {
+    getUsers().then((userArray) => {
+      setUsers(userArray);
+    });
+  }, []);
+  return (
+    <>
+      <div className="calendar">
+        <div className="header">
+          <div className="month">{`${months[currentMonth]} ${currentYear}`}</div>
+          {currentUser ? (
+            <>
+              <PostNewEventButton />
+            </>
+          ) : (
+            <CategoryFilter
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
+          )}
+          <input
+            type="text"
+            placeholder="Search Events"
+            className="search-bar"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <div className="btns">
+            <CalendarLeftAndRightBtn
+              handleNextClick={handleNextClick}
+              handlePrevClick={handlePrevClick}
+            />
+          </div>
+        </div>
+        <div className="weekdays">
+          {days.map((day) => (
+            <div className="day" key={day}>
+              {day}
+            </div>
+          ))}
+        </div>
+        <div className="days">
+          <CalendarDaysData
+            prevLastDayDate={prevLastDayDate}
+            firstDay={firstDay}
+            lastDayDate={lastDayDate}
+            currentYear={currentYear}
+            currentMonth={currentMonth}
+            nextDays={nextDays}
+            events={searchedEvents}
+          />
+        </div>
+        <div className="current-date">
+          <p>{`Today: ${currentDate.toDateString()}`}</p>
+        </div>
+      </div>
+    </>
   return (
     <div className="container mx-auto p-8">
       <h1 className="text-3xl font-bold mb-4">Calendar</h1>
