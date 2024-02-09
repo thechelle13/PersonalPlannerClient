@@ -5,7 +5,10 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {      
+    extend: {  
+      rotate: {
+        '180': '180deg',
+      },
       colors: {
       goldenrod: '#DAA520',
       charcoal: '#051313',
