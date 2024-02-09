@@ -5,9 +5,9 @@ import { Register } from "../components/auth/Register";
 import { Authorized } from "./Authorized";
 import { Home } from "../pages/Home";
 import { Profile } from "../pages/Profile";
-import { Calendar } from "../pages/Calendar";
 import { Weather } from "../pages/Weather";
 import { EventForm } from "../components/forms/EventForm";
+import { Calendar } from "../components/calendar/Calendar";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState(() => {
