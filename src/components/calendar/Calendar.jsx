@@ -3,6 +3,7 @@ import { CalendarDaysData } from "./CalendarDaysData";
 import { PostNewEventButton } from "./PostNewEventButton";
 import "./Calendar.css";
 import { CategoryFilter } from "./CategoryFilter";
+import { useNavigate } from "react-router-dom";
 
 const months = [
   "January", "February", "March", "April", "May", "June",
@@ -67,6 +68,18 @@ export const Calendar = ({ currentUser }) => {
 
   const searchedEvents = filterEventsBySearch(filteredEvents, searchQuery);
 
+  const navigate = useNavigate();
+
+  const handleCreateEvent = () => {
+    if (!currentUser) {
+      alert("You are not authorized to create an event. Please Log in or Register.");
+    } else {
+      // Redirect to the create event page
+      navigate("/create-event");
+    }
+  };
+
+
   return (
     <>
       <div className="calendar">
@@ -123,6 +136,13 @@ export const Calendar = ({ currentUser }) => {
         <div className="current-date">
           <p>{`Today: ${currentDate.toDateString()}`}</p>
         </div>
+
+        <button
+            className="text-center font-bold p-2 border border-black bg-blue-900 text-white rounded-md"
+            onClick={handleCreateEvent}
+          >
+            Create An Event
+          </button>
       </div>
     </>
   );
