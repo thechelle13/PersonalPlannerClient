@@ -26,7 +26,7 @@ export const ApplicationViews = () => {
         <Route path="/" element={<Authorized currentUser={currentUser} setCurrentUser={setUser} />}>
           <Route index element={<Home />} />
           <Route path="/calendar" element={<Calendar currentUser={currentUser}/>} />
-        <Route path="/weather" element={<Weather />} />
+        <Route path="/weather" element={<Weather currentUser={currentUser} />} />
         </Route>
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register setUser={setUser} />} />
