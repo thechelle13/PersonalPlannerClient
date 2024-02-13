@@ -25,7 +25,7 @@ export const CategoryFilter = ({ selectedCategory, setSelectedCategory }) => {
         <option value="all">Choose A Category!</option>
         {categories.map((category) => (
           <option key={category.id} value={category.id}>
-            {category.name}
+            {category.label}
           </option>
         ))}
       </select>
