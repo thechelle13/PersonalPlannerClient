@@ -20,6 +20,7 @@ export const Calendar = ({ currentUser }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
+
   useEffect(() => {
     // You can fetch events data here if needed
     // For now, let's assume events are hardcoded or fetched elsewhere
@@ -49,7 +50,7 @@ export const Calendar = ({ currentUser }) => {
         Object.entries(events).map(([date, eventArray]) => [
           date,
           eventArray.filter(
-            (event) => event.categoryId === parseInt(selectedCategory)
+            (event) => event.category === parseInt(selectedCategory)
           ),
         ])
       )
@@ -60,7 +61,7 @@ export const Calendar = ({ currentUser }) => {
       Object.entries(events).map(([date, eventArray]) => [
         date,
         eventArray.filter((event) =>
-          event.className.toLowerCase().includes(searchQuery.toLowerCase())
+          event.title.toLowerCase().includes(searchQuery.toLowerCase())
         ),
       ])
     );
@@ -124,6 +125,7 @@ export const Calendar = ({ currentUser }) => {
         </div>
         <div className="days">
           <CalendarDaysData
+            setEvents={setEvents}
             prevLastDayDate={prevLastDayDate}
             firstDay={firstDay}
             lastDayDate={lastDayDate}
