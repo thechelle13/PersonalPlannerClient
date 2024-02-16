@@ -8,6 +8,7 @@ import { Profile } from "../pages/Profile";
 import { Weather } from "../pages/Weather";
 import { EventForm } from "../components/forms/EventForm";
 import { Calendar } from "../components/calendar/Calendar";
+import { EventDetails } from "../pages/EventDetails";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState(() => {
@@ -39,6 +40,7 @@ export const ApplicationViews = () => {
         </Route>
         <Route path="/create-event" element={<Authorized currentUser={currentUser} setCurrentUser={setUser} />}>
           <Route index element={<EventForm />} />
+          <Route path=":eventId" element={<EventDetails />} />
         </Route>
 
         {/* Add other Routes here */}
