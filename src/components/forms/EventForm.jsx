@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { postEvent } from '../../managers/EventManager';
 import { getCategories } from '../../managers/CategoryManager';
 
@@ -17,7 +18,7 @@ export const EventForm = ({currentUser}) => {
   });
 
   const [categories, setCategories] = useState([]);
-
+  const navigate = useNavigate()
   useEffect(() => {
     // Fetch categories when the component mounts
     fetchCategories();
@@ -60,6 +61,7 @@ export const EventForm = ({currentUser}) => {
       const createdEvent = await postEvent(eventData);
 
       console.log('Event created successfully:', createdEvent);
+      navigate(`/create-event/${createdEvent.id}`);
       // Optionally, you can redirect the user after successful form submission
       // history.push('/some-other-route');
     } catch (error) {

@@ -55,3 +55,31 @@ export const getEvents = async () => {
       throw error;
     }
   };
+  export const getEventDetails = async (eventId) => {
+    try {
+      const currentUser = JSON.parse(localStorage.getItem('current_user'));
+  
+      if (!currentUser || !currentUser.token) {
+        throw new Error('User not authenticated');
+      }
+  
+      const response = await fetch(`http://localhost:8000/events/${eventId}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Token ${currentUser.token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch event details');
+      }
+  
+      const eventDetails = await response.json();
+      return eventDetails;
+    } catch (error) {
+      console.error('Error fetching event details:', error);
+      throw error;
+    }
+  };

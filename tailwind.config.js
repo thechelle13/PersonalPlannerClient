@@ -13,6 +13,7 @@ export default {
       goldenrod: '#DAA520',
       charcoal: '#051313',
       Navy: '#103548',
+      Seafoam : '#8BE5AD',
     },
   },
 },
