@@ -19,6 +19,7 @@ export const CategoryFilter = ({ selectedCategory, setSelectedCategory }) => {
   return (
     <>
       <select
+        id="categoryFilter" 
         className="category-filter"
         onChange={(e) => setSelectedCategory(e.target.value)}
       >
