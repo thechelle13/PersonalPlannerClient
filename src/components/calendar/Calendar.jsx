@@ -99,6 +99,8 @@ export const Calendar = ({ currentUser }) => {
           )}
           <input
             type="text"
+            id="searchEvents" 
+            name="searchEvents"
             placeholder="Search Events"
             className="search-bar"
             value={searchQuery}
