@@ -1,54 +1,33 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import "./Calendar.css";
 import { getEvents } from "../../managers/EventManager";
 
 export const CalendarDaysData = ({
-  setEvents,
   prevLastDayDate,
   firstDay,
   lastDayDate,
   currentYear,
   currentMonth,
-  events,
   nextDays,
   selectedCategory,
 }) => {
+  const [eventsByDate, setEventsByDate] = useState({});
+
   const formatDateKey = (day) => {
     const formattedDay = day < 10 ? `0${day}` : day;
-    const formattedMonth =
-      currentMonth + 1 < 10 ? `0${currentMonth + 1}` : currentMonth + 1;
+    const formattedMonth = currentMonth + 1 < 10 ? `0${currentMonth + 1}` : currentMonth + 1;
     const formattedDate = `${currentYear}-${formattedMonth}-${formattedDay}`;
-    console.log(`Formatted Date: ${formattedDate}`);
-    console.log(`Events for this date:`, events[formattedDate]);
     return formattedDate;
   };
-  const organizeEventsByDate = (eventsArray) => {
-    const eventsByDate = {};
-  
-    eventsArray.forEach((event) => {
-      const dateKey = event.start_datetime; // Adjust this according to your event date property
-      if (!eventsByDate[dateKey]) {
-        eventsByDate[dateKey] = [];
-      }
-      eventsByDate[dateKey].push(event);
-    });
-  
-    return eventsByDate;
-  };
-  
+
   useEffect(() => {
     const fetchEventsData = async () => {
       try {
-        // Fetch events
         const eventsArray = await getEvents();
-
-        // Organize events by date
-        const eventsByDate = organizeEventsByDate(eventsArray);
-
-        // Set events in state
-        setEvents(eventsByDate);
+        const organizedEvents = organizeEventsByDate(eventsArray);
+        setEventsByDate(organizedEvents);
       } catch (error) {
         console.error('Error fetching events:', error);
       }
@@ -56,6 +35,20 @@ export const CalendarDaysData = ({
 
     fetchEventsData();
   }, []);
+
+  const organizeEventsByDate = (eventsArray) => {
+    const eventsByDate = {};
+
+    eventsArray.forEach((event) => {
+      const dateKey = event.event_date; // Assuming event_date is the property containing the date
+      if (!eventsByDate[dateKey]) {
+        eventsByDate[dateKey] = [];
+      }
+      eventsByDate[dateKey].push(event);
+    });
+
+    return eventsByDate;
+  };
 
   return (
     <>
@@ -69,8 +62,7 @@ export const CalendarDaysData = ({
       {Array.from({ length: lastDayDate }).map((_, index) => {
         const dayNumber = index + 1;
         const formattedDate = formatDateKey(dayNumber);
-
-        const dayEvents = events[formattedDate] || [];
+        const dayEvents = eventsByDate[formattedDate] || [];
 
         return (
           <div
@@ -95,7 +87,6 @@ export const CalendarDaysData = ({
                   <div className="event-details">
                     <h3>{event.title}</h3>
                     <p>{event.description}</p>
-                    {/* You can add more event details as needed */}
                   </div>
                 </div>
               </Link>
