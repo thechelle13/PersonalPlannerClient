@@ -1,9 +1,14 @@
 export const getCategories = () => {
-    return fetch(`http://localhost:8000/categories/`,
+  const currentUser = JSON.parse(localStorage.getItem('current_user'));
+  
+      if (!currentUser || !currentUser.token) {
+        throw new Error('User not authenticated');
+      }  
+  return fetch(`http://localhost:8000/categories`,
     {
         method: "GET",
         headers: {
-            Authorization: `Token ${localStorage.getItem("auth_token")}`,
+          Authorization: `Token ${currentUser.token}`,
             "Content-Type": "application/json"
         }
       }).then((res) => res.json())

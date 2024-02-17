@@ -1,3 +1,4 @@
+
 export const getEvents = async () => {
     try {
       const currentUser = JSON.parse(localStorage.getItem('current_user'));
@@ -80,6 +81,64 @@ export const getEvents = async () => {
       return eventDetails;
     } catch (error) {
       console.error('Error fetching event details:', error);
+      throw error;
+    }
+  };
+  export const deleteEvent = async (eventId) => {
+    try {
+      const currentUser = JSON.parse(localStorage.getItem('current_user'));
+  
+      if (!currentUser || !currentUser.token) {
+        throw new Error('User not authenticated');
+      }
+  
+      const response = await fetch(`http://localhost:8000/events/${eventId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Token ${currentUser.token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to delete event');
+      }
+  
+  
+      return true; // Resolve the promise indicating successful deletion
+    } catch (error) {
+      console.error('Error deleting event:', error);
+      throw error;
+    }
+  };
+  export const updateEvent = async (eventId, updatedFields) => {
+    try {
+      const currentUser = JSON.parse(localStorage.getItem('current_user'));
+  
+      if (!currentUser || !currentUser.token) {
+        throw new Error('User not authenticated');
+      }
+  
+      const response = await fetch(`http://localhost:8000/events/${eventId}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Token ${currentUser.token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(updatedFields),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update event');
+      }
+  
+      // Assuming your API returns the updated event details
+      const updatedEvent = await response.json();
+      return updatedEvent;
+    } catch (error) {
+      console.error('Error updating event:', error);
       throw error;
     }
   };
