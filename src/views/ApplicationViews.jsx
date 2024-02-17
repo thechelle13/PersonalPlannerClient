@@ -36,7 +36,9 @@ export const ApplicationViews = () => {
           element={<Authorized currentUser={currentUser} setCurrentUser={setUser} />}
         >
           
-          <Route index element={<Profile currentUser={currentUser} />} />
+          <Route index element={<Profile currentUser={currentUser} setCurrentUser={setUser}  />} />
+     
+
         </Route>
         <Route path="/create-event" element={<Authorized currentUser={currentUser} setCurrentUser={setUser} />}>
           <Route index element={<EventForm />} />

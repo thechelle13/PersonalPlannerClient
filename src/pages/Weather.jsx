@@ -58,8 +58,9 @@ export const Weather = ({ currentUser }) => {
           <div key={index} className="card">
             <img src={getWeatherIconUrl(forecastItem.weather[0].icon)} alt="Weather Icon" />
             <div>
-              <p>Date: {formatDate(forecastItem.dt_txt)}</p>
-              <p>Time: {formatTime(forecastItem.dt_txt)}</p>
+              <p> {formatDate(forecastItem.dt_txt)}</p>
+              <p> {formatTime(forecastItem.dt_txt)}</p>
+              <p>{forecastItem.main.temp}°F</p>
               <details>
                 <summary>More Info</summary>
                 <p>Temperature: {forecastItem.main.temp}°F</p>
@@ -77,6 +78,7 @@ export const Weather = ({ currentUser }) => {
           <div>Enter ZIP Code: </div>
           <input
             type="text"
+            name="zipCode"
             value={zipCode}
             onChange={handleZipCodeChange}
             placeholder="e.g., 12345"
