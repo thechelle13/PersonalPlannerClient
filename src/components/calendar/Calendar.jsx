@@ -86,7 +86,7 @@ export const Calendar = ({ currentUser }) => {
       <div className="calendar">
         <div className="header">
           <div className="month">{`${months[currentMonth]} ${currentYear}`}</div>
-          {currentUser.isStaff ? (
+          {currentUser && currentUser.isStaff ? (
             <>
               <PostNewEventButton />
             </>
