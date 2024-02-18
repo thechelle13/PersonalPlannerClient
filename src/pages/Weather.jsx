@@ -3,7 +3,7 @@ import './pages.css';
 
 export const Weather = ({ currentUser }) => {
   const [weatherData, setWeatherData] = useState(null);
-  const [zipCode, setZipCode] = useState(currentUser.pp_user.zipcode || '');
+  const [zipCode, setZipCode] = useState(currentUser?.pp_user?.zipcode || '');
 
   const handleZipCodeChange = (event) => {
     setZipCode(event.target.value);
