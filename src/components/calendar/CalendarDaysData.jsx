@@ -79,14 +79,14 @@ export const CalendarDaysData = ({
 
             {dayEvents.map((event, eventIndex) => (
               <Link
-                to={`/events/${event.id}`}
+                to={`/create-event/${event.id}`}
                 key={`event-${eventIndex}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <div className="flex">
                   <div className="event-details">
                     <h3>{event.title}</h3>
-                    <p>{event.description}</p>
+                    <p>{event.event_time}</p>
                   </div>
                 </div>
               </Link>
