@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams , useNavigate} from 'react-router-dom';
 import { deleteEvent, getEventDetails, updateEvent } from '../managers/EventManager';
-import { getCategories } from '../services/categoryService';
+import { getCategories } from '../managers/CategoryManager';
+
 
 export const EventDetails = () => {
   const { eventId } = useParams();

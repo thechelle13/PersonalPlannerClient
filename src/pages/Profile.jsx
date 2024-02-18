@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
-import { getAllEvents } from "../services/eventsService";
+import { getEvents } from "../managers/EventManager";
+
 
 export const Profile = ({ currentUser }) => {
   // Check if currentUser is not available (not logged in)
@@ -14,7 +15,7 @@ export const Profile = ({ currentUser }) => {
   useEffect(() => {
     const fetchUserEvents = async () => {
       try {
-        const events = await getAllEvents(currentUser.id);
+        const events = await getEvents(currentUser.id);
         setUserEvents(events);
       } catch (error) {
         console.error("Error fetching events:", error);
