@@ -22,6 +22,13 @@ export const CalendarDaysData = ({
     return formattedDate;
   };
 
+  const convertToStandardTime = (time) => {
+    const [hours, minutes] = time.split(":");
+    const isPM = hours >= 12;
+    const standardHours = isPM ? hours - 12 : hours;
+    return `${standardHours}:${minutes} ${isPM ? "PM" : "AM"}`;
+  };
+
   useEffect(() => {
     const fetchEventsData = async () => {
       try {
@@ -86,7 +93,7 @@ export const CalendarDaysData = ({
                 <div className="flex">
                   <div className="event-details">
                     <h3>{event.title}</h3>
-                    <p>{event.event_time}</p>
+                    <p>{convertToStandardTime(event.event_time)}</p>
                   </div>
                 </div>
               </Link>
