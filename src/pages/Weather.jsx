@@ -50,29 +50,45 @@ export const Weather = ({ currentUser }) => {
     return `http://openweathermap.org/img/wn/${iconCode}.png`;
   };
 
+  // Group forecast items by date
+  const groupedForecast = {};
+  if (weatherData && weatherData.list) {
+    weatherData.list.forEach((forecastItem) => {
+      const date = formatDate(forecastItem.dt_txt);
+      if (!groupedForecast[date]) {
+        groupedForecast[date] = [];
+      }
+      groupedForecast[date].push(forecastItem);
+    });
+  }
+
   return (
     <div className="container mx-auto p-8">
       <h1 className="text-3xl font-bold mb-4">Weather</h1>
-      <div className="flex-container flex justify-start">
-        {weatherData && weatherData.list && weatherData.list.map((forecastItem, index) => (
-          <div key={index} className="card">
-            <img src={getWeatherIconUrl(forecastItem.weather[0].icon)} alt="Weather Icon" />
-            <div>
-              <p> {formatDate(forecastItem.dt_txt)}</p>
-              <p> {formatTime(forecastItem.dt_txt)}</p>
-              <p>{forecastItem.main.temp}°F</p>
-              <details>
-                <summary>More Info</summary>
-                <p>Temperature: {forecastItem.main.temp}°F</p>
-                <p>Feels Like: {forecastItem.main.feels_like}°F</p>
-                <p>Weather: {forecastItem.weather[0].description}</p>
-                <p>Humidity: {forecastItem.main.humidity}%</p>
-                <p>Wind Speed: {forecastItem.wind.speed} mph</p>
-              </details>
-            </div>
+      {Object.keys(groupedForecast).map((date, index) => (
+        <div key={index} className="rounded-lg bg-gray-200 p-4 mb-4">
+          <h2 className="text-xl font-bold mb-2">{date}</h2>
+          <div className="flex-container flex justify-start">
+            {groupedForecast[date].map((forecastItem, index) => (
+              <div key={index} className="card">
+                <img src={getWeatherIconUrl(forecastItem.weather[0].icon)} alt="Weather Icon" />
+                <div>
+                  <p> {formatTime(forecastItem.dt_txt)}</p>
+                  <p>{forecastItem.main.temp}°F</p>
+                  <details>
+                    <summary>More Info</summary>
+                    <p>Temperature: {forecastItem.main.temp}°F</p>
+                    <p>Feels Like: {forecastItem.main.feels_like}°F</p>
+                    <p>Weather: {forecastItem.weather[0].description}</p>
+                    <p>Humidity: {forecastItem.main.humidity}%</p>
+                    <p>Wind Speed: {forecastItem.wind.speed} mph</p>
+                  </details>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
       <div className="card">
         <div className="input-container">
           <div>Enter ZIP Code: </div>
