@@ -33,16 +33,16 @@ export const Home = () => {
     </header>
 
     <section className="bg-seafoam-green text-charcoal p-8 mb-8">
-      <h2 className="text-2xl font-bold mb-4">About Us</h2>
-      <p>
-        We are a collaborative team of NSS Graduates who are working on the Personal Planner Project. Our team consists of Josh Bartow, Michelle Totherow, and Daniel Bennett.
-      </p>
+    <h2 className="text-2xl font-bold mb-4 text-Seafoam">About Us</h2>
+<p className="text-Seafoam">
+    We are a collaborative team of NSS Graduates who are working on the Personal Planner Project. Our team consists of Josh Bartow, Michelle Totherow, and Daniel Bennett.
+</p>
 
       <div className="flex justify-between mt-4">
           {teamMembers.map((member, index) => (
             <div key={index} className="text-center">
               <img src={member.photo} alt={member.name} className="mx-auto w-32 h-32 rounded-full mb-2" />
-              <p className="text-lg font-semibold">{member.name}</p>
+              <p className="text-lg font-semibold text-Seafoam">{member.name}</p>
               <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">LinkedIn</a>
             </div>
           ))}
@@ -50,8 +50,8 @@ export const Home = () => {
     </section>
 
     <section className="bg-seafoam-green text-charcoal p-8">
-      <h2 className="text-2xl font-bold mb-4">Things to Come</h2>
-      <p>
+      <h2 className="text-2xl font-bold mb-4 text-Seafoam">Things to Come</h2>
+      <p className="text-Seafoam">
         Stay tuned for updates on our Personal Planner Project. Exciting features and improvements are on the way!
       </p>
     </section>
