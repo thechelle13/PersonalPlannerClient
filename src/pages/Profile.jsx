@@ -35,35 +35,55 @@ export const Profile = ({ currentUser }) => {
     <>
       <div className="min-h-screen">
         <div className="p-8">
-          <h1 className="text-3xl font-bold mb-4">Hello, {currentUser.firstName}!</h1>
+          <h1 className="text-3xl text-Seafoam font-bold mb-4">Hello, {currentUser.firstName}!</h1>
           <div className="mb-8">
-            <h2 className="text-2xl font-bold mb-4">Profile Page</h2>
-            <div className="mb-6 bg-Navy p-6 rounded-lg shadow-lg border border-black">
-              <i className="fas fa-house-user fa-5x mb-4" style={{ color: '#DAA520' }}></i>
-              <h3 className="text-lg font-semibold mb-4"></h3>
-              <p className="font-bold text-2xl text-goldenrod mb-4">City: {currentUser.pp_user.city}</p>
-              <p className="font-bold text-2xl text-goldenrod mb-4">State: {currentUser.pp_user.state}</p>
-              <p className="font-bold text-2xl text-goldenrod mb-4">Zipcode: {currentUser.pp_user.zipcode}</p>
-              <p className="font-bold text-2xl text-goldenrod mb-4">Address: {currentUser.pp_user.address}</p>
-            </div>
-            <div>
-              <h1 className="text-lg font-semibold mb-2 underline">My Events</h1>
-              {userEvents.length === 0 ? (
-                <p>No events found.</p>
-              ) : (
-                <ul>
-                  {userEvents.map((event) => (
-                    <li key={event.id} className="mb-4">
-                      <Link to={`/create-event/${event.id}`} className="text-blue-500 hover:underline">
-                      <p>Date: {event.event_date}</p>
-                      <p>Title: {event.title}</p>
-                      </Link>
-                      
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+            <h2 className="text-2xl  text-Seafoam font-bold mb-4">Profile Page</h2>
+            <div className="bg-opacity-50 border border-Seafoam border-opacity-50 p-6 rounded-lg shadow-lg mb-8">
+  <div className="flex items-center mb-4">
+    <i className="fas fa-house-user text-5xl mr-4 text-Seafoam"></i>
+    <div>
+      <h3 className="text-2xl font-semibold mb-2 text-Seafoam">User Information</h3>
+      <div className="flex flex-col">
+        <div className="flex items-center mb-2">
+          <span className="font-bold text-lg mr-2 text-Seafoam">City:</span>
+          <span className="font-bold text-lg text-goldenrod">{currentUser.pp_user.city}</span>
+        </div>
+        <div className="flex items-center mb-2">
+          <span className="font-bold text-lg mr-2 text-Seafoam">State:</span>
+          <span className="font-bold text-lg text-goldenrod">{currentUser.pp_user.state}</span>
+        </div>
+        <div className="flex items-center mb-2">
+          <span className="font-bold text-lg mr-2 text-Seafoam">Zipcode:</span>
+          <span className="font-bold text-lg text-goldenrod">{currentUser.pp_user.zipcode}</span>
+        </div>
+        <div className="flex items-center mb-2">
+          <span className="font-bold text-lg mr-2 text-Seafoam">Address:</span>
+          <span className="font-bold text-lg text-goldenrod">{currentUser.pp_user.address}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div className="bg-opacity-50 border border-Seafoam border-opacity-50 p-6 rounded-lg shadow-lg">
+  <h1 className="text-3xl text-Seafoam font-semibold mb-2 underline">My Events</h1>
+  {userEvents.length === 0 ? (
+    <p className="text-Seafoam">No events found.</p>
+  ) : (
+    <ul>
+      {userEvents.map((event) => (
+        <li key={event.id} className="mb-4">
+          <Link to={`/create-event/${event.id}`} className="text-blue-500 hover:underline">
+            <p className="text-Seafoam">Date: {event.event_date}</p>
+            <p className="text-Seafoam">Title: {event.title}</p>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
           </div>
         </div>
       </div>
