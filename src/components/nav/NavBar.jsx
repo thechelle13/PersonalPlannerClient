@@ -9,10 +9,10 @@ const NavBar = ({ currentUser, setCurrentUser }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center space-x-2">
+          <a href="https://nashvillesoftwareschool.com/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
               <img src={nssLogo} alt="NSS Logo" className="h-8 w-8" />
               <span className="text-blue-300 font-semibold text-lg">NSS Alumni</span>
-            </Link>
+            </a>
           </div>
           <div className="hidden md:flex space-x-4 text-lg"> 
             <Link to="/" className="nav-link text-Seafoam">Home</Link>
