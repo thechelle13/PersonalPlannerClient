@@ -134,3 +134,30 @@ export const getEvents = async () => {
       throw error;
     }
   };
+
+  export const rsvpToEvent = async (eventId) => {
+    try {
+      const currentUser = JSON.parse(localStorage.getItem('current_user'));
+  
+      if (!currentUser || !currentUser.token) {
+        throw new Error('User not authenticated');
+      }
+        const response = await fetch(`http://localhost:8000/events/${eventId}/rsvp`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: `Token ${currentUser.token}`, // Assuming you have a function to get the user token
+            },
+            // You can pass any additional data needed for RSVP in the body
+            body: JSON.stringify({}),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to RSVP to event');
+        }
+    } catch (error) {
+        console.error('Error RSVPing to event:', error);
+        throw error;
+    }
+};

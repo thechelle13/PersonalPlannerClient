@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams , useNavigate} from 'react-router-dom';
-import { deleteEvent, getEventDetails, updateEvent } from '../managers/EventManager';
+import { deleteEvent, getEventDetails, rsvpToEvent, updateEvent } from '../managers/EventManager';
 import { getCategories } from '../managers/CategoryManager';
 
 
-export const EventDetails = () => {
+// eslint-disable-next-line react/prop-types
+export const EventDetails = ({ currentUser }) => {
   const { eventId } = useParams();
   const [eventDetails, setEventDetails] = useState(null);
   const [editMode, setEditMode] = useState(false);
@@ -88,7 +89,20 @@ export const EventDetails = () => {
       // Handle error if needed
     }
   };
-
+  const handleRSVP = async () => {
+    try {
+        // Assuming you have an API function for RSVP
+        await rsvpToEvent(eventId);
+        // Refresh event details after RSVP
+        const updatedDetails = await getEventDetails(eventId);
+        console.log('Updated event details:', updatedDetails);
+        setEventDetails(updatedDetails);
+        alert('RSVP successful!');
+    } catch (error) {
+        console.error('Error RSVPing to event:', error);
+        // Handle error if needed
+    }
+};
   const handleDelete = async () => {
     try {
       // Assuming you have a function to delete the event in your manager
@@ -109,7 +123,10 @@ export const EventDetails = () => {
       [name]: value,
     }));
   };
-
+  // eslint-disable-next-line react/prop-types
+  const hasRSVPd = eventDetails.attendees.some((attendee) => attendee.id === currentUser.id);
+  console.log('attendees:', eventDetails.attendees);
+  console.log('currentUser.id:', currentUser.id);
   return (
     <div className="container mx-auto p-8">
       <div className="max-w-md mx-auto bg-Navy rounded-md shadow-md p-6 mb-6">
@@ -273,7 +290,21 @@ export const EventDetails = () => {
               <p className="text-goldenrod">
                 <strong>Zipcode:</strong> {eventDetails.zipcode}
               </p>
-              {/* Add more paragraphs as needed */}
+              <div className="mt-4 flex justify-center">
+                {!hasRSVPd && (
+                  <button
+                    onClick={handleRSVP}
+                    className="bg-Green hover:bg-black-700 text-goldenrod py-2 px-4 rounded-lg"
+                  >
+                    RSVP Now
+                  </button>
+                )}
+                {hasRSVPd && (
+                  <p className="text-goldenrod">
+                    You have already RSVP'd to this event.
+                  </p>
+                )}
+              </div>
             </div>
           </>
         )}
