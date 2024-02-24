@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './pages.css';
+import blueSkyPhoto from '../assets/blue-sky.jpg';
 
 export const Weather = ({ currentUser }) => {
   const [weatherData, setWeatherData] = useState(null);
@@ -66,7 +67,7 @@ export const Weather = ({ currentUser }) => {
     <div className="container mx-auto p-8">
       <h1 className="text-3xl font-bold mb-4">Weather</h1>
       {Object.keys(groupedForecast).map((date, index) => (
-        <div key={index} className="rounded-lg bg-gray-200 p-4 mb-4">
+        <div key={index} className="rounded-lg p-4 mb-4" style={{ backgroundImage: `url(${blueSkyPhoto})`, backgroundSize: 'cover' }}>
           <h2 className="text-xl font-bold mb-2">{date}</h2>
           <div className="flex-container flex justify-start">
             {groupedForecast[date].map((forecastItem, index) => (
