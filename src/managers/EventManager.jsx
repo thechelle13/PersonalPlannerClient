@@ -23,6 +23,33 @@ export const getEvents = async () => {
     throw error;
   }
 };
+export const getUserEvents = async () => {
+  try {
+    const currentUser = JSON.parse(localStorage.getItem('current_user'));
+
+    if (!currentUser || !currentUser.token) {
+      throw new Error('User not authenticated');
+    }
+    const response = await fetch(`http://localhost:8000/events/list_user_events`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Token ${currentUser.token}`, // Assuming you have a function to get the user token
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch user events: ${response.statusText}`);
+    }
+
+    const events = await response.json();
+    return events;
+  } catch (error) {
+    console.error('Error fetching user events:', error.message);
+    throw error;
+  }
+};
 
   export const postEvent = async (eventData) => {
     try {
