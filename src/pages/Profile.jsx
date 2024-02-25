@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
-import { getEvents } from "../managers/EventManager";
+import { getUserEvents } from "../managers/EventManager";
 
 
 export const Profile = ({ currentUser }) => {
@@ -15,7 +15,7 @@ export const Profile = ({ currentUser }) => {
   useEffect(() => {
     const fetchUserEvents = async () => {
       try {
-        const events = await getEvents(currentUser.id);
+        const events = await getUserEvents(currentUser.id);
         setUserEvents(events);
       } catch (error) {
         console.error("Error fetching events:", error);
