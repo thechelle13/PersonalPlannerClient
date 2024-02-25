@@ -39,11 +39,25 @@ export const Profile = ({ currentUser }) => {
           <div className="mb-8">
             <h2 className="text-2xl  text-Seafoam font-bold mb-4">Profile Page</h2>
             <div className="bg-opacity-50 border border-Seafoam border-opacity-50 p-6 rounded-lg shadow-lg mb-8">
+            <h3 className="text-2xl font-semibold mb-4 text-Seafoam">User Information</h3>
   <div className="flex items-center mb-4">
+    
     <i className="fas fa-house-user text-5xl mr-4 text-Seafoam"></i>
     <div>
-      <h3 className="text-2xl font-semibold mb-2 text-Seafoam">User Information</h3>
+      
       <div className="flex flex-col">
+      <div className="flex items-center mb-2">
+          <span className="font-bold text-lg mr-2 text-Seafoam">First Name:</span>
+          <span className="font-bold text-lg text-goldenrod">{currentUser.firstName}</span>
+        </div>
+        <div className="flex items-center mb-2">
+          <span className="font-bold text-lg mr-2 text-Seafoam">Last Name:</span>
+          <span className="font-bold text-lg text-goldenrod">{currentUser.lastName}</span>
+        </div>
+        <div className="flex items-center mb-2">
+          <span className="font-bold text-lg mr-2 text-Seafoam">Email:</span>
+          <span className="font-bold text-lg text-goldenrod">{currentUser.email}</span>
+        </div>
         <div className="flex items-center mb-2">
           <span className="font-bold text-lg mr-2 text-Seafoam">City:</span>
           <span className="font-bold text-lg text-goldenrod">{currentUser.pp_user.city}</span>
@@ -60,6 +74,12 @@ export const Profile = ({ currentUser }) => {
           <span className="font-bold text-lg mr-2 text-Seafoam">Address:</span>
           <span className="font-bold text-lg text-goldenrod">{currentUser.pp_user.address}</span>
         </div>
+        <button
+                  // onClick={handleEdit}
+                  className="bg-Seafoam hover:bg-white text-Black py-2 px-4 rounded-lg"
+                >
+                  Edit
+                </button>
       </div>
     </div>
   </div>
