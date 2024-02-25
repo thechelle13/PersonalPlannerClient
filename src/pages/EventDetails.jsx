@@ -290,6 +290,10 @@ export const EventDetails = ({ currentUser }) => {
               <p className="text-goldenrod">
                 <strong>Zipcode:</strong> {eventDetails.zipcode}
               </p>
+              <p className="text-goldenrod">
+                <strong>Headcount:</strong> {eventDetails.attendees_count}
+              </p>
+
               <div className="mt-4 flex justify-center">
                 {!hasRSVPd && (
                   <button
