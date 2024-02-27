@@ -9,32 +9,32 @@ const NavBar = ({ currentUser, setCurrentUser }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-          <a href="https://nashvillesoftwareschool.com/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
+            <a href="https://nashvillesoftwareschool.com/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
               <img src={nssLogo} alt="NSS Logo" className="h-8 w-8" />
               <span className="text-blue-300 font-semibold text-lg">NSS Alumni</span>
             </a>
           </div>
           <div className="hidden md:flex space-x-4 text-lg"> 
-            <Link to="/" className="nav-link text-Seafoam">Home</Link>
-            <Link to="/calendar" className="nav-link text-Seafoam">Calendar</Link>
-            <Link to="/weather" className="nav-link text-Seafoam">Weather Forecasts</Link>
+            <Link to="/" className="nav-link text-Seafoam hover:text-white">Home</Link>
+            <Link to="/calendar" className="nav-link text-Seafoam hover:text-white">Calendar</Link>
+            <Link to="/weather" className="nav-link text-Seafoam hover:text-white">Weather Forecasts</Link>
             {currentUser ? (
               <>
-                <Link to="/profile" className="nav-link text-Seafoam">Profile</Link>
+                <Link to="/profile" className="nav-link text-Seafoam hover:text-white">Profile</Link>
                 <button
                   onClick={() => {
                     setCurrentUser("");
                     navigate("/login");
                   }}
-                  className="nav-link cursor-pointer text-Seafoam"
+                  className="nav-link cursor-pointer text-Seafoam hover:text-white"
                 >
                   Logout
                 </button>
               </>
             ) : (
               <>
-                <Link to="/register" className="nav-link text-Seafoam">Register</Link>
-                <Link to="/login" className="nav-link text-Seafoam">Login</Link>
+                <Link to="/register" className="nav-link text-Seafoam hover:text-white">Register</Link>
+                <Link to="/login" className="nav-link text-Seafoam hover:text-white">Login</Link>
               </>
             )}
           </div>
