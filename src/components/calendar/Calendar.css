@@ -145,7 +145,14 @@
   appearance: none; /* Remove default appearance */
   background-color: var(--accent-color);
   font-size: 16px;
+  transition: background-color 0.3s ease; /* Add transition for smooth effect */
 }
+
+.category-filter:hover,
+.search-bar:hover {
+  background-color: #f8f6f2; /* Change the background color on hover */
+}
+
 
 .profile-button-container {
   text-align: left;
@@ -159,4 +166,12 @@
 
 .search-bar:hover {
   background-color: var(--accent-color);
+}
+.arrow-icon {
+  color: #8BE5AD;
+  transition: color 0.3s ease;
+}
+
+.arrow-icon:hover {
+  color: #f8f6f2 !important;
 }
