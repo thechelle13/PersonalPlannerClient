@@ -12,12 +12,13 @@ const months = [
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export const Calendar = ({ currentUser }) => {
+  const [filteredEventsByCategory, setFilteredEventsByCategory] = useState({});
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState({});
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
+
 
 
   useEffect(() => {
@@ -55,18 +56,8 @@ export const Calendar = ({ currentUser }) => {
       )
     : events;
 
-  const filterEventsBySearch = (events, searchQuery) => {
-    return Object.fromEntries(
-      Object.entries(events).map(([date, eventArray]) => [
-        date,
-        eventArray.filter((event) =>
-          event.title.toLowerCase().includes(searchQuery.toLowerCase())
-        ),
-      ])
-    );
-  };
 
-  const searchedEvents = filterEventsBySearch(filteredEvents, searchQuery);
+  
 
   const navigate = useNavigate();
 
@@ -90,6 +81,7 @@ export const Calendar = ({ currentUser }) => {
             <CategoryFilter
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
+              setFilteredEvents={setFilteredEventsByCategory}
             />
           )}
         </div>
@@ -116,7 +108,7 @@ export const Calendar = ({ currentUser }) => {
             currentYear={currentYear}
             currentMonth={currentMonth}
             nextDays={nextDays}
-            events={searchedEvents}
+            selectedCategory={selectedCategory}
           />
         </div>
         <div className="current-date">

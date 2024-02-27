@@ -188,3 +188,30 @@ export const getUserEvents = async () => {
         throw error;
     }
 };
+
+  export const getEventsByCategory = async (categoryId) => {
+    try {
+      const url = `http://localhost:8000/events/list_by_category?category_id=${categoryId}`;
+      
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          // Include Authorization header if needed
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch events by category: ${response.statusText}`);
+      }
+
+      const events = await response.json();
+      return events;
+    } catch (error) {
+      console.error('Error fetching events by category:', error.message);
+      // Handle errors gracefully
+      throw error;
+    }
+  };
+

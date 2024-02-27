@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getCategories } from "../../managers/CategoryManager";
 import { getEvents } from "../../managers/EventManager";
 
-export const CategoryFilter = ({ selectedCategory, setSelectedCategory }) => {
+export const CategoryFilter = ({ selectedCategory, setSelectedCategory,setFilteredEvents }) => {
   const [categories, setCategories] = useState([]);
   const [events, setEvents] = useState([]);
 
@@ -13,15 +13,23 @@ export const CategoryFilter = ({ selectedCategory, setSelectedCategory }) => {
 
     getEvents().then((eventArr) => {
       setEvents(eventArr);
+      setFilteredEvents(eventArr);
     });
   }, []);
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    
+    // Filter events based on the selected category
+    const filteredEvents = events.filter((event) => event.category === category || category === 'all');
+    setFilteredEvents(filteredEvents);
+  };
 
   return (
     <>
       <select
         id="categoryFilter" 
         className="category-filter"
-        onChange={(e) => setSelectedCategory(e.target.value)}
+        onChange={(e) => handleCategoryChange(e.target.value)}
       >
         <option value="all">Category </option>
         {categories.map((category) => (
