@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import "./Calendar.css";
-import { getEvents } from "../../managers/EventManager";
+import { getEvents, getEventsByCategory } from "../../managers/EventManager";
 
 export const CalendarDaysData = ({
   prevLastDayDate,
@@ -42,6 +42,23 @@ export const CalendarDaysData = ({
 
     fetchEventsData();
   }, []);
+  useEffect(() => {
+    const fetchEventsByCategory = async () => {
+      try {
+        const eventsArray = await getEventsByCategory(selectedCategory);
+        console.log('Events Array:', eventsArray);
+        const organizedEvents = organizeEventsByDate(eventsArray);
+        setEventsByDate(organizedEvents);
+      } catch (error) {
+        console.error('Error fetching events by category:', error);
+      }
+    };
+
+    // Check if a category is selected before making the fetch
+    if (selectedCategory) {
+      fetchEventsByCategory();
+    }
+  }, [selectedCategory]);
 
   const organizeEventsByDate = (eventsArray) => {
     const eventsByDate = {};
@@ -51,8 +68,13 @@ export const CalendarDaysData = ({
       if (!eventsByDate[dateKey]) {
         eventsByDate[dateKey] = [];
       }
-      eventsByDate[dateKey].push(event);
+
+      // Check if the event has the selected category or if no category is selected
+      if (!selectedCategory || event.category.id === parseInt(selectedCategory)) {
+        eventsByDate[dateKey].push(event);
+      }
     });
+
 
     return eventsByDate;
   };
