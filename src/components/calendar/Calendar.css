@@ -7,9 +7,9 @@
 
 :root {
   --primary-color: #f8f6f2;
-  --text-color: #b0daf0;
+  --text-color: #8BE5AD;
   --bg-color: #19191c;
-  --accent-color: #99c68d;
+  --accent-color: #8BE5AD;
 }
 
 .calendar {
@@ -17,18 +17,17 @@
   height: 100%;
   /* max-height: 2000px; */
   max-width: 2000px;
-  background: var(--bg-color);
   padding: 10px 20px;
   border-radius: 10px;
 }
 .calendar .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 20px;
   padding-left: 20px;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid #8BE5AD;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -141,7 +140,7 @@
   position: relative;
   padding: 5px 10px;
   cursor: pointer;
-  border: 1px solid #ccc;
+  border: 1px solid #8BE5AD;
   border-radius: 4px;
   appearance: none; /* Remove default appearance */
   background-color: var(--accent-color);
