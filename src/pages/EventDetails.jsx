@@ -22,6 +22,7 @@ export const EventDetails = ({ currentUser }) => {
   });
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     const fetchEventDetails = async () => {
@@ -95,7 +96,6 @@ export const EventDetails = ({ currentUser }) => {
         await rsvpToEvent(eventId);
         // Refresh event details after RSVP
         const updatedDetails = await getEventDetails(eventId);
-        console.log('Updated event details:', updatedDetails);
         setEventDetails(updatedDetails);
         alert('RSVP successful!');
     } catch (error) {
@@ -125,8 +125,6 @@ export const EventDetails = ({ currentUser }) => {
   };
   // eslint-disable-next-line react/prop-types
   const hasRSVPd = eventDetails.attendees.some((attendee) => attendee.id === currentUser.id);
-  console.log('attendees:', eventDetails.attendees);
-  console.log('currentUser.id:', currentUser.id);
   return (
     <div className="container mx-auto p-8">
       <div className="max-w-md mx-auto bg-Navy rounded-md shadow-md p-6 mb-6">
@@ -266,31 +264,31 @@ export const EventDetails = ({ currentUser }) => {
         </>
         ) : (
           <>
-            <h1 className="text-goldenrod text-3xl font-bold mb-4">{eventDetails.title}</h1>
+            <h1 className="text-white text-3xl font-bold mb-4">{eventDetails.title}</h1>
             <div>
-              <h3 className="text-lg text-goldenrod font-semibold mb-2">Category: {eventDetails.category.label}</h3>
-              <p className="text-goldenrod">
+              <h3 className="text-lg text-white font-semibold mb-2">Category: {eventDetails.category.label}</h3>
+              <p className="text-white">
                 <strong>Date:</strong> {eventDetails.event_date}
               </p>
-              <p className="text-goldenrod">
+              <p className="text-white">
                 <strong>Start Time:</strong> {eventDetails.event_time}
               </p>
-              <p className="text-goldenrod">
+              <p className="text-white">
                 <strong>Description:</strong> {eventDetails.description}
               </p>
-              <p className="text-goldenrod">
+              <p className="text-white">
                 <strong>City:</strong> {eventDetails.city}
               </p>
-              <p className="text-goldenrod">
+              <p className="text-white">
                 <strong>State:</strong> {eventDetails.state}
               </p>
-              <p className="text-goldenrod">
+              <p className="text-white">
                 <strong>Address:</strong> {eventDetails.address}
               </p>
-              <p className="text-goldenrod">
+              <p className="text-white">
                 <strong>Zipcode:</strong> {eventDetails.zipcode}
               </p>
-              <p className="text-goldenrod">
+              <p className="text-red-700">
                 <strong>Headcount:</strong> {eventDetails.attendees_count}
               </p>
 
@@ -298,7 +296,7 @@ export const EventDetails = ({ currentUser }) => {
                 {!hasRSVPd && (
                   <button
                     onClick={handleRSVP}
-                    className="bg-Green hover:bg-black-700 text-goldenrod py-2 px-4 rounded-lg"
+                    className="bg-Seafoam hover:bg-white text-Black py-2 px-4 rounded-lg"
                   >
                     RSVP Now
                   </button>
@@ -312,39 +310,43 @@ export const EventDetails = ({ currentUser }) => {
             </div>
           </>
         )}
-        <div className="mt-4 flex justify-center">
-          {editMode ? (
-            <>
-              <button
-                onClick={handleUpdate}
-                className="bg-Seafoam hover:bg-black-700 text-goldenrod py-2 px-4 rounded-lg mr-2"
-              >
-                Save
-              </button>
-              <button
-                onClick={() => setEditMode(false)}
-                className="bg-Gray hover:bg-black-700 text-goldenrod py-2 px-4 rounded-lg"
-              >
-                Cancel
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={handleDelete}
-                className="bg-Red hover:bg-black-700 text-goldenrod py-2 px-4 rounded-lg mr-4"
-              >
-                Delete
-              </button>
-              <button
-                onClick={handleEdit}
-                className="bg-Seafoam hover:bg-black-700 text-goldenrod py-2 px-4 rounded-lg"
-              >
-                Edit
-              </button>
-            </>
-          )}
-        </div>
+      <div className="mt-4 flex justify-center">
+        {eventDetails.user === currentUser.id && (
+          <>
+            {editMode ? (
+              <>
+                <button
+                  onClick={handleUpdate}
+                  className="bg-Seafoam hover:bg-black-700 text-goldenrod py-2 px-4 rounded-lg mr-2"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => setEditMode(false)}
+                  className="bg-Gray hover:bg-black-700 text-goldenrod py-2 px-4 rounded-lg"
+                >
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={handleDelete}
+                  className="bg-Seafoam hover:bg-red-700 text-Black py-2 px-4 rounded-lg mr-4"
+                >
+                  Delete
+                </button>
+                <button
+                  onClick={handleEdit}
+                  className="bg-Seafoam hover:bg-white text-Black py-2 px-4 rounded-lg"
+                >
+                  Edit
+                </button>
+              </>
+            )}
+          </>
+        )}
+      </div>
       </div>
     </div>
   );
