@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { CalendarDaysData } from "./CalendarDaysData";
-import { PostNewEventButton } from "./PostNewEventButton";
 import "./Calendar.css";
 import { CategoryFilter } from "./CategoryFilter";
 import { useNavigate } from "react-router-dom";
@@ -85,37 +84,20 @@ export const Calendar = ({ currentUser }) => {
     <>
       <div className="calendar">
         <div className="header">
-          <div className="month">{`${months[currentMonth]} ${currentYear}`}</div>
           {currentUser && currentUser.isStaff ? (
-            <>
-              <PostNewEventButton />
-            </>
+            null
           ) : (
-            
             <CategoryFilter
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
             />
           )}
-          <input
-            type="text"
-            id="searchEvents" 
-            name="searchEvents"
-            placeholder="Search Events"
-            className="search-bar"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <div className="btns">
-            {/* Use HTML version of the arrow icon */}
-            <i
-              className="fas fa-arrow-right arrow-icon"
-              onClick={handleNextClick}
-            ></i>
-            <i
-            className="fas fa-arrow-right arrow-icon rotate-180"
-            onClick={handlePrevClick}
-          ></i>
+        </div>
+        <div className="header">
+          <div className="mx-auto flex items-center">
+            <i className="fas fa-arrow-left arrow-icon text-4xl mr-8" style={{ color: '#8BE5AD' }} onClick={handlePrevClick}></i>
+            <div className="month">{`${months[currentMonth]} ${currentYear}`}</div>
+            <i className="fas fa-arrow-right arrow-icon text-4xl ml-8" style={{ color: '#8BE5AD' }} onClick={handleNextClick}></i>
           </div>
         </div>
         <div className="weekdays">
@@ -140,14 +122,12 @@ export const Calendar = ({ currentUser }) => {
         <div className="current-date">
           <p>{`Today: ${currentDate.toDateString()}`}</p>
         </div>
-
         <button
-            className="text-center font-bold p-2 border border-black bg-blue-900 text-white rounded-md"
-            onClick={handleCreateEvent}
-          >
-            Create An Event
-          </button>
+          className="text-center font-bold p-2 border border-black bg-navy bg-Navy text-white rounded-md hover:bg-Seafoam"
+          onClick={handleCreateEvent}
+        >
+        Create An Event
+      </button>
       </div>
     </>
-  );
-};
+  )};

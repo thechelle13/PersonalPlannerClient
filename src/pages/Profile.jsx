@@ -16,7 +16,7 @@ export const Profile = ({ currentUser }) => {
     const fetchUserEvents = async () => {
       try {
         const events = await getUserEvents(currentUser.id);
-        setUserEvents(events);
+         setUserEvents(events);
       } catch (error) {
         console.error("Error fetching events:", error);
         // Display an error message to the user
