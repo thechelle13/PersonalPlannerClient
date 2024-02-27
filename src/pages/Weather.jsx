@@ -65,7 +65,7 @@ export const Weather = ({ currentUser }) => {
 
   return (
     <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-4">Weather</h1>
+      <h1 className="text-3xl font-bold mb-4 text-Seafoam">Weather</h1>
       {Object.keys(groupedForecast).map((date, index) => (
         <div key={index} className="rounded-lg p-4 mb-4" style={{ backgroundImage: `url(${blueSkyPhoto})`, backgroundSize: 'cover' }}>
           <h2 className="text-xl font-bold mb-2">{date}</h2>
@@ -92,7 +92,7 @@ export const Weather = ({ currentUser }) => {
       ))}
       <div className="card">
         <div className="input-container">
-          <div>Enter ZIP Code: </div>
+          <div className="text-Seafoam">Enter ZIP Code: </div>
           <input
             type="text"
             name="zipCode"
