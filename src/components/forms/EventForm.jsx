@@ -72,10 +72,10 @@ export const EventForm = ({currentUser}) => {
 
   return (
     <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-4">Create Event</h1>
+      <h1 className="text-3xl text-Seafoam font-bold mb-4">Create Event</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="eventTitle" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="eventTitle" className="block text-sm text-Seafoam font-medium">
             Event Display Name/Title
           </label>
           <input
@@ -89,7 +89,7 @@ export const EventForm = ({currentUser}) => {
           />
         </div>
         <div className="mb-4">
-        <label htmlFor="categoryId" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="categoryId" className="block text-sm font-medium text-Seafoam">
           Select Category
         </label>
         <select
@@ -109,7 +109,7 @@ export const EventForm = ({currentUser}) => {
         </select>
       </div>
         <div className="mb-4">
-          <label htmlFor="eventDate" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="eventDate" className="block text-sm font-medium text-Seafoam">
             Event Date
           </label>
           <input
@@ -123,7 +123,7 @@ export const EventForm = ({currentUser}) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="eventStartTime" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="eventStartTime" className="block text-sm font-medium text-Seafoam">
             Event Start Time
           </label>
           <input
@@ -137,7 +137,7 @@ export const EventForm = ({currentUser}) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="eventDescription" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="eventDescription" className="block text-sm font-medium text-Seafoam">
             Event Description
           </label>
           <textarea
@@ -151,7 +151,7 @@ export const EventForm = ({currentUser}) => {
           ></textarea>
         </div>
         <div className="mb-4">
-          <label htmlFor="eventCity" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="eventCity" className="block text-sm font-medium text-Seafoam">
             Event City
           </label>
           <input
@@ -165,7 +165,7 @@ export const EventForm = ({currentUser}) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="eventState" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="eventState" className="block text-sm font-medium text-Seafoam">
             Event State
           </label>
           <input
@@ -179,7 +179,7 @@ export const EventForm = ({currentUser}) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="eventAddress" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="eventAddress" className="block text-sm font-medium text-Seafoam">
             Event Address
           </label>
           <input
@@ -193,7 +193,7 @@ export const EventForm = ({currentUser}) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="eventZipcode" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="eventZipcode" className="block text-sm font-medium text-Seafoam">
             Event Zipcode
           </label>
           <input
