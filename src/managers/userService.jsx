@@ -1,20 +1,43 @@
-export const getUser = () => {
-    return fetch(`http://localhost:8000/users/pickleusers/`, {
-      method: "GET",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("auth_token")}`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
-  };
+export const editUserById = (id, formData, authToken) => {
+  console.log('Updating Fetch user:', formData); // Log the data being sent
+  return fetch(`http://localhost:8000/ppusers/${id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Token ${authToken}`, // Use the authToken provided as a parameter
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to edit user');
+    }
+    return response.json();
+  })
+  .catch(error => {
+    console.error('Error editing user:', error.message);
+    return null;
+  });
+};
 
-  export const UpdateUser = (updatedUser) => {
-    return fetch(`http://localhost:8000/users/pickleuser/update/`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("auth_token")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedUser), // Include the updated user data in the request body
-    }).then((res) => res.json());
-  };
+
+export const deleteUserById = (id, authToken) => {
+  return fetch(`http://localhost:8000/ppusers/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${authToken}`,
+    },
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to delete user');
+    }
+    return response.json();
+  })
+  .catch(error => {
+    console.error('Error deleting user:', error.message);
+    return null;
+  });
+};
+
+  
