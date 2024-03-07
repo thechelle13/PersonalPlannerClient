@@ -14,6 +14,7 @@ export default {
       charcoal: '#051313',
       Navy: '#103548',
       Seafoam : '#8BE5AD',
+      red: '#FF0000', // Added red color
     },
   },
 },
