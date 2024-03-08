@@ -241,8 +241,8 @@ export const Profile = ({ currentUser, setCurrentUser}) => {
 
         </form>
       ) : (
-      <div className="min-h-screen">
-        <div className="p-8">
+      <div >
+        <div className="mt-20">
           <h1 className="text-3xl text-Seafoam font-bold mb-4">Hello, {currentUser.firstName}!</h1>
           <div className="mb-8">
             <h2 className="text-2xl  text-Seafoam font-bold mb-4">Profile Page</h2>
