@@ -69,7 +69,10 @@ export const Calendar = ({ currentUser }) => {
       navigate("/create-event");
     }
   };
+ const handleShowAllEvents = () => {
+  window.location.reload();
 
+ }
 
   return (
     <>
@@ -83,7 +86,14 @@ export const Calendar = ({ currentUser }) => {
               setSelectedCategory={setSelectedCategory}
               setFilteredEvents={setFilteredEventsByCategory}
             />
+            
           )}
+          <button
+          className="reload-button category-filter"
+          onClick={handleShowAllEvents}
+          >
+          Show All
+        </button>
         </div>
         <div className="header">
           <div className="mx-auto flex items-center">
