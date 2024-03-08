@@ -36,6 +36,12 @@ export const Home = () => {
     'Collaboration with NSS alumni',
     'Communication using Zoom, Slack, MS Teams',
     'Setup using NSS templates',
+    'Automated API testing',
+    'Development Tool utilization',
+    'Social Media Integration',
+    'Search Functionality',
+    'Responsive Design',
+    'Error Handling and Logging'
   ];
 
   return (
