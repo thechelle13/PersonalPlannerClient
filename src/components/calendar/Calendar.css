@@ -22,7 +22,7 @@
 }
 .calendar .header {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 20px;
@@ -54,7 +54,7 @@
 }
 
 .calendar .header .btns .btn {
-  width: 60px;
+  width: 80px; /* Adjust the width as needed */
   height: 40px;
   display: flex;
   justify-content: center;
@@ -63,6 +63,12 @@
   font-size: 45px;
   cursor: pointer;
   transition: all 0.3s;
+  margin-right: 10px; /* Adjust the margin as needed */
+}
+
+/* Style for the last button to prevent extra margin */
+.calendar .header .btns .btn:last-child {
+  margin-right: 0;
 }
 
 .calendar .header .btns .btn:hover {
