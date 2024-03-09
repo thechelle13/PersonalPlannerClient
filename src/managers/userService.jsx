@@ -41,3 +41,58 @@ export const deleteUserById = (id, authToken) => {
 };
 
   
+export const addProfilePicture = async (userId, formData, authToken) => {
+  try {
+    const response = await fetch(`http://localhost:8000/ppusers/${userId}/add-profile-picture`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Token ${authToken}`,
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      console.error('Failed to upload profile picture - Server Error:', response.statusText);
+    }
+
+    const updatedUser = await response.json();
+    return updatedUser;
+  } catch (error) {
+    console.error('Error uploading profile picture:', error);
+    throw error;
+  }
+};
+
+export const getProfilePicture = async (userId, authToken, setProfilePicture, setCurrentUser ) => {
+    const currentUser = JSON.parse(localStorage.getItem('current_user'));
+
+  try {
+    const response = await fetch(`http://localhost:8000/ppusers/${userId}/profile-picture`, {
+      headers: {
+        Authorization: `Token ${authToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      console.error('Failed to fetch profile picture - Server Error:', response.statusText);
+    }
+
+    const data = await response.json();
+
+    if (data && data.profile_picture) {
+      setProfilePicture(data.profile_picture);
+
+      // Update currentUser with the new profile picture URL
+      setCurrentUser({
+        ...currentUser,
+        pp_user: {
+          ...currentUser.pp_user,
+          profile_picture: data.profile_picture,
+        },
+      });
+    }
+  } catch (error) {
+    console.error('Error fetching profile picture:', error);
+    throw error;
+  }
+};
