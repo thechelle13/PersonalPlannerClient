@@ -146,7 +146,7 @@ export const Profile = ({ currentUser, setCurrentUser}) => {
         console.error("Error uploading profile picture:", error);
     }
 };
-  return (
+return (
     <>
      <div className="p-8">
       <h1 className="text-3xl text-Seafoam font-bold mb-4">Hello, {currentUser.firstName}!</h1>
