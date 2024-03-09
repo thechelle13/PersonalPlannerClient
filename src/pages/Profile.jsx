@@ -1,18 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { getUserEvents } from "../managers/EventManager";
-import { deleteUserById, editUserById} from "../managers/userService";
+import { addProfilePicture, deleteUserById, editUserById, getProfilePicture} from "../managers/userService";
 
 
 export const Profile = ({ currentUser, setCurrentUser}) => {
   // Check if currentUser is not available (not logged in)
+
   if (!currentUser) {
     window.alert("You must be a registered user to access this page.");
     return <Navigate to="/login" replace />;
   }
-
+  const setProfilePictureCallback = useCallback((data) => setProfilePicture(data), []);
+  const setCurrentUserCallback = useCallback((user) => setCurrentUser(user), []);
+  
   const [userEvents, setUserEvents] = useState([]);
   const [editMode, setEditMode] = useState(false);
+  const [profilePicture, setProfilePicture] = useState(null); 
+
+//currentUser.pp_user.profile_picture
   const [formData, setFormData] = useState({
     firstName: currentUser.firstName,
     lastName: currentUser.lastName,
@@ -21,7 +27,7 @@ export const Profile = ({ currentUser, setCurrentUser}) => {
     city: currentUser.pp_user.city,
     state: currentUser.pp_user.state,
     address: currentUser.pp_user.address,
-    zipcode: currentUser.pp_user.zipcode,
+    zipcode: currentUser.pp_user.zipcode
   });
  
   useEffect(() => {
@@ -38,15 +44,19 @@ export const Profile = ({ currentUser, setCurrentUser}) => {
     fetchUserEvents();
   }, [currentUser.id]); // Trigger effect when currentUser changes
 
+  useEffect(() => {
+    const fetchProfilePicture = async () => {
+      try {
+        await getProfilePicture(currentUser.id, currentUser.token, setProfilePictureCallback, setCurrentUserCallback);
+      } catch (error) {
+        console.error('Error fetching profile picture:', error);
+      }
+    };
 
-  // Function to handle input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+    // Fetch profile picture when the component mounts
+    fetchProfilePicture();
+  }, [currentUser.id, currentUser.token, setProfilePictureCallback, setCurrentUserCallback]);
+
 
   // Function to toggle edit mode
   const handleEdit = () => {
@@ -105,30 +115,42 @@ export const Profile = ({ currentUser, setCurrentUser}) => {
     }
   };
   
+  const handleUpload = async (e) => {
+    e.preventDefault();
 
-  // const handleDeleteAccount = async () => {
-  //   // Prompt the user for confirmation before deleting the account
-  //   const confirmDelete = window.confirm("Are you sure you want to delete your account?");
-  //   if (confirmDelete) {
-  //     try {
-  //       const authToken = currentUser.token;
-  //       const deletedUser = await deleteUserById(currentUser.id, authToken);
-  //       if (deletedUser) {
-  //         // Redirect to login page after successful deletion
-  //         return <Navigate to="/" replace />;
-  //       } else {
-  //         console.error("Failed to delete user");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error deleting user:", error);
-  //     }
-  //   }
-  // };
-  
+    try {
+        const authToken = currentUser.token;
+        const formData = new FormData();
+        formData.append('profile_picture', e.target.files[0]);
 
 
+        const response = await addProfilePicture(currentUser.id, formData, authToken);
+
+
+        if (response && response.profile_picture) {
+            console.log("Updating profile picture URL:", response.profile_picture);
+            setProfilePicture(response.profile_picture);
+
+            // Update currentUser with the new profile picture URL
+            setCurrentUser({
+                ...currentUser,
+                pp_user: {
+                    ...currentUser.pp_user,
+                    profile_picture: response.profile_picture,
+                },
+            });
+        } else {
+            console.error("Failed to upload profile picture or missing properties");
+        }
+    } catch (error) {
+        console.error("Error uploading profile picture:", error);
+    }
+};
   return (
     <>
+     <div className="p-8">
+      <h1 className="text-3xl text-Seafoam font-bold mb-4">Hello, {currentUser.firstName}!</h1>
+      </div>
     {editMode ? (
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-y-4 justify-items-center">
           <div className="flex items-center">
@@ -241,20 +263,38 @@ export const Profile = ({ currentUser, setCurrentUser}) => {
 
         </form>
       ) : (
-      <div className="min-h-screen">
         <div className="p-8">
-          <h1 className="text-3xl text-Seafoam font-bold mb-4">Hello, {currentUser.firstName}!</h1>
+        <>
+          <label htmlFor="upload-input" className="cursor-pointer">
+            <img
+              src={`http://localhost:8000${currentUser.pp_user.profile_picture}`}
+              style={{ width: '100px', height: '100px', borderRadius: '50%' }}
+              className="w-32 h-32 rounded-full mb-2"
+            />
+            <div className="bg-Seafoam text-white px-4 py-2 rounded-lg">
+              Upload Profile Photo
+            </div>
+          </label>
+          <input
+            type="file"
+            id="upload-input"
+            accept="image/*"
+            onChange={handleUpload}
+            className="hidden"
+          />
+        </>
+        <div className="p-8">
           <div className="mb-8">
             <h2 className="text-2xl  text-Seafoam font-bold mb-4">Profile Page</h2>
             <div className="bg-opacity-50 border border-Seafoam border-opacity-50 p-6 rounded-lg shadow-lg mb-8">
             <h3 className="text-2xl font-semibold mb-4 text-Seafoam">User Information</h3>
-  <div className="flex items-center mb-4">
+        <div className="flex items-center mb-4">
     
-    <i className="fas fa-house-user text-5xl mr-4 text-Seafoam"></i>
-    <div>
+        <i className="fas fa-house-user text-5xl mr-4 text-Seafoam"></i>
+        <div>
       
-      <div className="flex flex-col">
-      <div className="flex items-center mb-2">
+        <div className="flex flex-col">
+        <div className="flex items-center mb-2">
           <span className="font-bold text-lg mr-2 text-Seafoam">First Name:</span>
           <span className="font-bold text-lg text-goldenrod">{currentUser.firstName}</span>
         </div>
