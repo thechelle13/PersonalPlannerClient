@@ -32,7 +32,7 @@ export const Home = () => {
     'Built using React + Vite',
     'Tailwind CSS styling',
     'API with Python and Django',
-    'Built using Scrum & project tickets',
+    'Scrum & project tickets, Agile',
     'Collaboration with NSS alumni',
     'Utilize Zoom, Slack, MS Teams',
     'Setup using NSS templates',
