@@ -58,6 +58,15 @@ export const Profile = ({ currentUser, setCurrentUser}) => {
   }, [currentUser.id, currentUser.token, setProfilePictureCallback, setCurrentUserCallback]);
 
 
+  // added back into for edit functionality
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   // Function to toggle edit mode
   const handleEdit = () => {
     setEditMode(true);
