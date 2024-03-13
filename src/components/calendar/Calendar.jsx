@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CalendarDaysData } from "./CalendarDaysData";
 import "./Calendar.css";
+import "./Ifmobile.css";
 import { CategoryFilter } from "./CategoryFilter";
 import { useNavigate } from "react-router-dom";
 
