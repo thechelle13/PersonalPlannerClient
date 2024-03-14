@@ -68,6 +68,8 @@ export const Weather = ({ currentUser }) => {
     setSelectedDay(selectedDay === date ? null : date);
   };
 
+  
+
   return (
     <div className="container mx-auto p-8 max-w-xl">  
       <h1 className="text-3xl font-bold mb-4 text-Seafoam">Weather</h1>
@@ -75,6 +77,7 @@ export const Weather = ({ currentUser }) => {
         <div key={index} className="rounded-lg p-4 mb-4" style={{ backgroundImage: `url(${blueSkyPhoto})`, backgroundSize: 'cover' }}>
           <div className="dropdown">
             <button className="dropbtn" onClick={() => handleDaySelect(date)}>
+            <img src={getWeatherIconUrl(groupedForecast[date][0].weather[0].icon)} alt="Weather Icon" className="inline-block w-8 h-8 mr-2" />
               {date}
             </button>
             <div className="dropdown-content" style={{ display: selectedDay === date ? 'block' : 'none' }}>
@@ -115,4 +118,5 @@ export const Weather = ({ currentUser }) => {
       </div>
     </div>
   );
+
 };
