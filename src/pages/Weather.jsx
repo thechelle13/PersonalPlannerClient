@@ -18,7 +18,7 @@ export const Weather = ({ currentUser }) => {
         return;
       }
 
-      const apiKey = 'b6307fe9b35fbb92f1d4b066061bc863';
+      const apiKey = 'your_key_here';
       const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode}&appid=${apiKey}&units=imperial`);
       const data = await response.json();
 
