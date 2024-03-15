@@ -155,6 +155,22 @@ export const Profile = ({ currentUser, setCurrentUser}) => {
         console.error("Error uploading profile picture:", error);
     }
 };
+
+const handleDeleteAccount = async () => {
+  // Prompt the user for confirmation before deleting the account
+  const confirmDelete = window.confirm("Are you sure you want to delete your account?");
+  if (confirmDelete) {
+    try {
+      const authToken = currentUser.token;
+      await deleteUserById(currentUser.id, authToken);
+      // After successful deletion, update the currentUser state
+      setCurrentUser(null);
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  }
+};
+
 return (
   <>
    <div className="p-8">
@@ -289,7 +305,10 @@ return (
           >
             Cancel
           </button>
-        </div>
+         </div>
+         <button className="bg-red hover:bg-white text-Black py-2 px-4 rounded-lg" onClick={handleDeleteAccount}>
+        Delete My Account
+      </button>
       </form>
     ) : (
       <div className="min-h-screen ">
