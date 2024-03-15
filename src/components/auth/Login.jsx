@@ -78,7 +78,7 @@ export const Login = ({ setUser }) => {
             to="/register"
             className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
           >
-            Cancel
+            Register
           </Link>
         </div>
 

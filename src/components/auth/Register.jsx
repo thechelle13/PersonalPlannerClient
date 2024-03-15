@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUser } from "../../managers/AuthManager";
+import { loginUser, registerUser } from "../../managers/AuthManager";
 
 export const Register = ({ setUser }) => {
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const firstName = useRef();
   const lastName = useRef();
   const email = useRef();
@@ -34,8 +35,18 @@ export const Register = ({ setUser }) => {
 
       registerUser(newUser).then((res) => {
         if ("token" in res && res.token) {
-          setUser(res);
-          navigate("/login");
+          const loginData = {
+            username: newUser.username,
+            password: newUser.password,
+          };
+
+          loginUser(loginData).then((loginRes) => {
+            if ("token" in loginRes && loginRes.token) {
+              setUser(loginRes);
+              setRegistrationSuccess(true); // Set registration success flag
+              navigate("/"); // Redirect to the home page
+            }
+          });
         }
       });
     } else {
