@@ -18,7 +18,7 @@ export const Weather = ({ currentUser }) => {
         return;
       }
 
-      const apiKey = 'my_api_key';
+      const apiKey = import.meta.env.VITE_REACT_APP_OPENWEATHERMAP_API_KEY;
       const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode}&appid=${apiKey}&units=imperial`);
       const data = await response.json();
 
