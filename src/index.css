@@ -18,11 +18,29 @@ body {
     pointer-events: none; /* Allow clicks to pass through the overlay */
     z-index: -1; /* Set a lower z-index to position behind other content */
 }
+.sparkle-overlay2 {    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to pass through the overlay */
+    z-index: -1; /* Set a lower z-index to position behind other content */}
 
+.sparkle2 {    
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    background-color: rgba(248, 243, 243, 0.993); /* Sparkle color */
+    border-radius: 50%;
+    opacity: 0;
+    animation: sparkle 4s infinite;
+    top: var(--y);
+    left: var(--x);}
 .sparkle {
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: 0px;
+    height: 0px;
     background-color: rgba(248, 243, 243, 0.993); /* Sparkle color */
     border-radius: 50%;
     opacity: 0;
