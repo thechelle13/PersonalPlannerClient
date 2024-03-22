@@ -1,6 +1,6 @@
 export const editUserById = (id, formData, authToken) => {
   console.log('Updating Fetch user:', formData); // Log the data being sent
-  return fetch(`http://https://personal-planner-hryyx.ondigitalocean.app//ppusers/${id}`, {
+  return fetch(`https://personalplanner-api-app-3vixh.ondigitalocean.app/ppusers/${id}`, {
     method: "PUT",
     headers: {
       Authorization: `Token ${authToken}`, // Use the authToken provided as a parameter
@@ -22,7 +22,7 @@ export const editUserById = (id, formData, authToken) => {
 
 
 export const deleteUserById = (id, authToken) => {
-  return fetch(`http://https://personal-planner-hryyx.ondigitalocean.app//ppusers/${id}`, {
+  return fetch(`https://personalplanner-api-app-3vixh.ondigitalocean.app/ppusers/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Token ${authToken}`,
@@ -43,7 +43,7 @@ export const deleteUserById = (id, authToken) => {
   
 export const addProfilePicture = async (userId, formData, authToken) => {
   try {
-    const response = await fetch(`http://https://personal-planner-hryyx.ondigitalocean.app//ppusers/${userId}/add-profile-picture`, {
+    const response = await fetch(`https://personalplanner-api-app-3vixh.ondigitalocean.app/ppusers/${userId}/add-profile-picture`, {
       method: 'PATCH',
       headers: {
         Authorization: `Token ${authToken}`,
@@ -67,7 +67,7 @@ export const getProfilePicture = async (userId, authToken, setProfilePicture, se
     const currentUser = JSON.parse(localStorage.getItem('current_user'));
 
   try {
-    const response = await fetch(`http://https://personal-planner-hryyx.ondigitalocean.app//ppusers/${userId}/profile-picture`, {
+    const response = await fetch(`https://personalplanner-api-app-3vixh.ondigitalocean.app/ppusers/${userId}/profile-picture`, {
       headers: {
         Authorization: `Token ${authToken}`,
       },
