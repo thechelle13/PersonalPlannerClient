@@ -1,6 +1,6 @@
 export const getCategories = async () => {
   try {
-    const response = await fetch('http://https://personal-planner-hryyx.ondigitalocean.app//categories', {
+    const response = await fetch('https://personalplanner-api-app-3vixh.ondigitalocean.app/categories', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

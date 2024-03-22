@@ -180,7 +180,7 @@ return (
     <label htmlFor="upload-input" className="cursor-pointer">
       <div className="flex justify-center"> {/* Center horizontally */}
         <img
-          src={`http://https://personal-planner-hryyx.ondigitalocean.app/${currentUser.pp_user.profile_picture}`}
+          src={`https://personalplanner-api-app-3vixh.ondigitalocean.app${currentUser.pp_user.profile_picture}`}
           style={{ width: '100px', height: '100px', borderRadius: '50%' }}
           className="w-32 h-32 rounded-full mb-4"
         />
