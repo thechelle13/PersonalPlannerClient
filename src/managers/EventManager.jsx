@@ -2,7 +2,7 @@
 // Function to fetch all events
 export const getEvents = async () => {
   try {
-    const response = await fetch('http://localhost:8000/events', {
+    const response = await fetch('http://https://personal-planner-hryyx.ondigitalocean.app//events', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export const getUserEvents = async () => {
     if (!currentUser || !currentUser.token) {
       throw new Error('User not authenticated');
     }
-    const response = await fetch(`http://localhost:8000/events/list_user_events`, {
+    const response = await fetch(`http://https://personal-planner-hryyx.ondigitalocean.app//events/list_user_events`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export const getUserEvents = async () => {
         throw new Error('User not authenticated');
       }
   
-      const response = await fetch('http://localhost:8000/events', {
+      const response = await fetch('http://https://personal-planner-hryyx.ondigitalocean.app//events', {
         method: 'POST',
         headers: {
           Authorization: `Token ${currentUser.token}`,
@@ -83,7 +83,7 @@ export const getUserEvents = async () => {
   
   export const getEventDetails = async (eventId) => {
     try {
-      const response = await fetch(`http://localhost:8000/events/${eventId}`, {
+      const response = await fetch(`http://https://personal-planner-hryyx.ondigitalocean.app//events/${eventId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ export const getUserEvents = async () => {
         throw new Error('User not authenticated');
       }
   
-      const response = await fetch(`http://localhost:8000/events/${eventId}`, {
+      const response = await fetch(`http://https://personal-planner-hryyx.ondigitalocean.app//events/${eventId}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Token ${currentUser.token}`,
@@ -139,7 +139,7 @@ export const getUserEvents = async () => {
         throw new Error('User not authenticated');
       }
   
-      const response = await fetch(`http://localhost:8000/events/${eventId}`, {
+      const response = await fetch(`http://https://personal-planner-hryyx.ondigitalocean.app//events/${eventId}`, {
         method: 'PUT',
         headers: {
           Authorization: `Token ${currentUser.token}`,
@@ -169,7 +169,7 @@ export const getUserEvents = async () => {
       if (!currentUser || !currentUser.token) {
         throw new Error('User not authenticated');
       }
-        const response = await fetch(`http://localhost:8000/events/${eventId}/rsvp`, {
+        const response = await fetch(`http://https://personal-planner-hryyx.ondigitalocean.app//events/${eventId}/rsvp`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -191,7 +191,7 @@ export const getUserEvents = async () => {
 
   export const getEventsByCategory = async (categoryId) => {
     try {
-      const url = `http://localhost:8000/events/list_by_category?category_id=${categoryId}`;
+      const url = `http://https://personal-planner-hryyx.ondigitalocean.app//events/list_by_category?category_id=${categoryId}`;
       
       const response = await fetch(url, {
         method: 'GET',
