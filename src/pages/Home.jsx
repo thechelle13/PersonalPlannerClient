@@ -3,6 +3,16 @@ import './pages.css';
 import joshPhoto from '../assets/josh.jpg';
 import michellePhoto from '../assets/michelle.jpg';
 import danielPhoto from '../assets/daniel.jpg';
+import reactSVG from '../assets/vitejs.svg';
+import Django from '../assets/djangoproject.svg';
+import node from '../assets/nodejsDark.svg';
+import HTML from '../assets/html-5.svg';
+import Tailwind from '../assets/tailwind.svg';
+import CSS from '../assets/css-3.svg';
+import Postman from '../assets/postman.svg';
+import SQL from '../assets/sql-azure.svg';
+import Figma from '../assets/figma.svg';
+import Python from '../assets/python.svg';
 
 export const Home = () => {
   const teamMembers = [
@@ -64,6 +74,23 @@ export const Home = () => {
               <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">LinkedIn</a>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Tech Stack section */}
+      <section className="bg-seafoam-green text-charcoal p-4 sm:p-8 mb-8">
+        <h2 className="text-xl sm:text-2xl font-bold mb-14 text-Seafoam">Tech Stack</h2>
+        <div className="flex justify-center flex-wrap items-center">
+          <img src={reactSVG} alt="React" className="w-16 h-16 sm:w-20 sm:h-20 mx-2" />
+          <img src={Python} alt="Python" className="w-16 h-16 sm:w-20 sm:h-20 mx-2" />
+          <img src={Django} alt="Django" className="w-16 h-16 sm:w-20 sm:h-20 mx-2" />
+          <img src={node} alt="node" className="w-16 h-16 sm:w-20 sm:h-20 mx-2 bg-white rounded-lg" />
+          <img src={HTML} alt="html" className="w-16 h-16 sm:w-20 sm:h-20 mx-2" />
+          <img src={CSS} alt="CSS" className="w-16 h-16 sm:w-20 sm:h-20 mx-2" />
+          <img src={Tailwind} alt="tailwind" className="w-16 h-16 sm:w-20 sm:h-20 mx-2" />
+          <img src={Postman} alt="Postman" className="w-16 h-16 sm:w-20 sm:h-20 mx-2" />
+          <img src={SQL} alt="SQL" className="w-16 h-16 sm:w-20 sm:h-20 mx-2" />
+          <img src={Figma} alt="Figma" className="w-16 h-16 sm:w-20 sm:h-20 mx-2" />
         </div>
       </section>
 
