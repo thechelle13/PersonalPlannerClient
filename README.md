@@ -8,3 +8,6 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 - If you Want to See the Python and Django Repo for this project which is integrated follow this link : https://github.com/Daniel-Bennett777/PersonalPlannerAPI
+
+- 
+![Website Home](https://github.com/thechelle13/PersonalPlannerClient/assets/134181900/19d2d57c-cef9-450c-b7a7-de1809424964)
